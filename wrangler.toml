@@ -2,6 +2,7 @@ name = "blog"
 compatibility_date = "2024-04-01"
 compatibility_flags = [ "nodejs_compat" ]
 pages_build_output_dir = "./dist"
+BUN_VERSION = 1.1.12
 
 # [vars]
 # MY_VAR = "my-variable"
