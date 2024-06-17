@@ -19,11 +19,7 @@ export default jsxRenderer(({ children, title, desc }) => {
 				<title>{pageTitle}</title>
 				<meta name="description" content={description} />
 				<link rel="icon" href="/favicon.ico" />
-				{import.meta.env.PROD ? (
-					<script src="/static/theme.js" />
-				) : (
-					<script src="/app/theme.ts" />
-				)}
+				<Script src="/app/theme.ts" />
 				<Link href="/app/styles/style.css" rel="stylesheet" />
 				<Script src="/app/client.ts" async />
 				<Style />
