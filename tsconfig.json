@@ -9,10 +9,6 @@
 		"types": ["vite/client", "@cloudflare/workers-types"],
 		"jsx": "react-jsx",
 		"jsxImportSource": "hono/jsx",
-		/* import alias */
-		"baseUrl": "./",
-		"paths": {
-			"@/*": ["src/*"]
-		}
+		"baseUrl": "./"
 	}
 }

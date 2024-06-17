@@ -1,5 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 export default {
+  darkMode: "class",
   content: ["./app/**/*.tsx"],
   theme: {
     container: {
@@ -36,13 +37,14 @@ export default {
           DEFAULT: "hsl(var(--accent))",
           foreground: "hsl(var(--accent-foreground))",
         },
-        popover: {
-          DEFAULT: "hsl(var(--popover))",
-          foreground: "hsl(var(--popover-foreground))",
-        },
         card: {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
+        },
+        btn: {
+          DEFAULT: "hsl(var(--btn))",
+          foreground: "hsl(var(--btn-foreground))",
+          hover: "hsl(var(--btn-hover))",
         },
       },
       borderRadius: {
