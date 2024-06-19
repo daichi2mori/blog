@@ -1,36 +1,36 @@
 {
-  "name": "basic",
-  "type": "module",
-  "scripts": {
-    "dev": "vite",
-    "build": "vite build --mode client && vite build",
-    "preview": "wrangler pages dev",
-    "deploy": "$npm_execpath run build && wrangler pages deploy"
-  },
-  "private": true,
-  "dependencies": {
-    "@hono/vite-ssg": "^0.1.0",
-    "@mdx-js/rollup": "^3.0.1",
-    "hono": "^4.4.3",
-    "honox": "^0.1.21",
-    "rehype-highlight": "^7.0.0",
-    "rehype-pretty-code": "^0.13.2",
-    "rehype-stringify": "^10.0.0",
-    "remark-frontmatter": "^5.0.0",
-    "remark-mdx-frontmatter": "^4.0.0",
-    "remark-parse": "^11.0.0",
-    "remark-rehype": "^11.1.0"
-  },
-  "devDependencies": {
-    "@biomejs/biome": "^1.8.0",
-    "@cloudflare/workers-types": "^4.20240529.0",
-    "@hono/vite-cloudflare-pages": "^0.4.0",
-    "@hono/vite-dev-server": "^0.12.1",
-    "autoprefixer": "^10.4.19",
-    "postcss": "^8.4.38",
-    "tailwindcss": "^3.4.3",
-    "vite": "^5.2.12",
-    "vite-tsconfig-paths": "^4.3.2",
-    "wrangler": "^3.57.2"
-  }
+	"name": "basic",
+	"type": "module",
+	"scripts": {
+		"dev": "vite",
+		"build": "vite build --mode client && vite build",
+		"preview": "wrangler pages dev",
+		"deploy": "$npm_execpath run build && wrangler pages deploy"
+	},
+	"private": true,
+	"dependencies": {
+		"@hono/vite-ssg": "^0.1.0",
+		"@mdx-js/rollup": "^3.0.1",
+		"hono": "^4.4.3",
+		"honox": "^0.1.23",
+		"rehype-highlight": "^7.0.0",
+		"rehype-pretty-code": "^0.13.2",
+		"rehype-stringify": "^10.0.0",
+		"remark-frontmatter": "^5.0.0",
+		"remark-mdx-frontmatter": "^4.0.0",
+		"remark-parse": "^11.0.0",
+		"remark-rehype": "^11.1.0"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "^1.8.0",
+		"@cloudflare/workers-types": "^4.20240529.0",
+		"@hono/vite-cloudflare-pages": "^0.4.0",
+		"@hono/vite-dev-server": "^0.12.1",
+		"autoprefixer": "^10.4.19",
+		"postcss": "^8.4.38",
+		"tailwindcss": "^3.4.3",
+		"vite": "^5.2.12",
+		"vite-tsconfig-paths": "^4.3.2",
+		"wrangler": "^3.57.2"
+	}
 }
