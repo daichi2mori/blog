@@ -16,12 +16,11 @@ const entry = "./app/server.ts";
 export default defineConfig(({ mode }) => {
 	if (mode === "client") {
 		return {
-			build: {
-				rollupOptions: {
+			plugins: [
+				client({
 					input: ["/app/theme.ts", "/app/styles/style.css"],
-				},
-			},
-			plugins: [client()],
+				}),
+			],
 		};
 	}
 

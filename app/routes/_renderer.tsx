@@ -1,3 +1,4 @@
+import { CustomScript } from "app/components/custom-script";
 import Footer from "app/components/footer";
 import Header from "app/components/header";
 import { Style } from "hono/css";
@@ -19,7 +20,7 @@ export default jsxRenderer(({ children, title, desc }) => {
 				<title>{pageTitle}</title>
 				<meta name="description" content={description} />
 				<link rel="icon" href="/favicon.ico" />
-				<Script src="/app/theme.ts" />
+				<CustomScript src="/app/theme.ts" />
 				<Link href="/app/styles/style.css" rel="stylesheet" />
 				<Script src="/app/client.ts" async />
 				<Style />
