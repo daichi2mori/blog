@@ -1,3 +1,4 @@
+import path from "node:path";
 import ssg from "@hono/vite-ssg";
 import mdx from "@mdx-js/rollup";
 import honox from "honox/vite";
@@ -8,7 +9,8 @@ import remarkFrontmatter from "remark-frontmatter";
 import remarkMdxFrontmatter from "remark-mdx-frontmatter";
 import remarkParse from "remark-parse";
 import remarkRehype from "remark-rehype";
-import { defineConfig } from "vite";
+import { defineConfig, normalizePath } from "vite";
+import { viteStaticCopy } from "vite-plugin-static-copy";
 import tsconfigPaths from "vite-tsconfig-paths";
 
 const entry = "./app/server.ts";
@@ -37,20 +39,36 @@ export default defineConfig(({ mode }) => {
 				remarkPlugins: [
 					remarkFrontmatter,
 					remarkMdxFrontmatter,
-					[
-						remarkRehype,
-						{
-							footnoteBackContent: "↩︎",
-							footnoteLabel: " ",
-							footnoteLabelTagName: "hr",
-							footnoteBackLabel: "Back to reference 1",
-						},
-					],
+					remarkRehype,
 					remarkParse,
 				],
 				rehypePlugins: [
 					rehypeStringify,
 					[rehypePrettyCode, { theme: "dark-plus", keepBackground: false }],
+				],
+			}),
+			viteStaticCopy({
+				targets: [
+					{
+						src: [
+							"./app/posts/**/*.png",
+							"./app/posts/**/*.jpg",
+							"./app/posts/**/*.jpeg",
+							"./app/posts/**/*.webp",
+							"./app/posts/**/*.gif",
+						],
+						dest: "static",
+						rename: (
+							fileName: string,
+							fileExtension: string,
+							_fullPath: string,
+						) => {
+							return normalizePath(
+								path.relative(__dirname, `${fileName}.${fileExtension}`),
+							);
+						},
+						overwrite: false,
+					},
 				],
 			}),
 		],
