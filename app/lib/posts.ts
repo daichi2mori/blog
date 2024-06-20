@@ -1,6 +1,6 @@
 import type { Frontmatter, MDX } from "../types/index";
 
-const posts = import.meta.glob<MDX>("../posts/*.mdx", {
+const posts = import.meta.glob<MDX>("../posts/**/*.mdx", {
 	eager: true,
 });
 
@@ -22,7 +22,7 @@ const sortByDateDesc = ():
 };
 
 const extractFilenameFromPath = (path: string) => {
-	const match = path.match(/([^/]+)\.mdx$/);
+	const match = path.match(/\/([^\/]+)\/index\.mdx$/);
 	if (!match) {
 		throw new Error(`Invalid path: ${path}`);
 	}
