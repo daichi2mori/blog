@@ -9,6 +9,7 @@ import remarkFrontmatter from "remark-frontmatter";
 import remarkMdxFrontmatter from "remark-mdx-frontmatter";
 import remarkParse from "remark-parse";
 import remarkRehype from "remark-rehype";
+import remarkUnwrapImages from "remark-unwrap-images";
 import { defineConfig, normalizePath } from "vite";
 import { viteStaticCopy } from "vite-plugin-static-copy";
 import tsconfigPaths from "vite-tsconfig-paths";
@@ -39,6 +40,7 @@ export default defineConfig(({ mode }) => {
 				remarkPlugins: [
 					remarkFrontmatter,
 					remarkMdxFrontmatter,
+					remarkUnwrapImages,
 					remarkRehype,
 					remarkParse,
 				],

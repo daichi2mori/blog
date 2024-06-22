@@ -118,3 +118,7 @@
 .markdown td {
   @apply border py-1 px-3;
 }
+
+.markdown img {
+  @apply aspect-auto;
+}

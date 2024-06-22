@@ -19,7 +19,8 @@
     "remark-frontmatter": "^5.0.0",
     "remark-mdx-frontmatter": "^4.0.0",
     "remark-parse": "^11.0.0",
-    "remark-rehype": "^11.1.0"
+    "remark-rehype": "^11.1.0",
+    "remark-unwrap-images": "^4.0.0"
   },
   "devDependencies": {
     "@biomejs/biome": "^1.8.1",
