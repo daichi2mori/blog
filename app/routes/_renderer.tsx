@@ -13,7 +13,7 @@ export default jsxRenderer(({ children, title, desc, slug }) => {
 		? `${title} - ${SiteConfig.blogName}`
 		: SiteConfig.blogName;
 	const description = desc ?? SiteConfig.description;
-	const ogpPath = slug ? `/ogps/${slug}.png` : "/ogp.png";
+	const ogpPath = slug ? `ogps/${slug}.png` : "/ogp.png";
 
 	return (
 		<html lang="ja">
