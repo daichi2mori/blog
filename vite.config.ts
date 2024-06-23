@@ -31,6 +31,7 @@ export default defineConfig(({ mode }) => {
 		build: {
 			emptyOutDir: false,
 		},
+
 		plugins: [
 			tsconfigPaths(),
 			ssg({ entry }),
@@ -74,5 +75,9 @@ export default defineConfig(({ mode }) => {
 				],
 			}),
 		],
+
+		ssr: {
+			external: ["satori", "@resvg/resvg-js", "budoux"],
+		},
 	};
 });

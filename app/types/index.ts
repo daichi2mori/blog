@@ -15,3 +15,10 @@ export type MDX = {
 	default: (props: MDXProps) => JSX.Element;
 	[Symbol.toStringTag]: string;
 };
+
+export type GoogleFontOptions = {
+	family: string;
+	weight?: number;
+	text?: string;
+	display?: string;
+};

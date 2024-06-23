@@ -11,6 +11,8 @@
   "dependencies": {
     "@hono/vite-ssg": "^0.1.0",
     "@mdx-js/rollup": "^3.0.1",
+    "@resvg/resvg-js": "^2.6.2",
+    "budoux": "^0.6.2",
     "hono": "^4.4.3",
     "honox": "^0.1.23",
     "rehype-highlight": "^7.0.0",
@@ -20,7 +22,8 @@
     "remark-mdx-frontmatter": "^4.0.0",
     "remark-parse": "^11.0.0",
     "remark-rehype": "^11.1.0",
-    "remark-unwrap-images": "^4.0.0"
+    "remark-unwrap-images": "^4.0.0",
+    "satori": "^0.10.13"
   },
   "devDependencies": {
     "@biomejs/biome": "^1.8.1",

@@ -43,6 +43,7 @@ export default createRoute(
 			{
 				title,
 				desc,
+				slug,
 			},
 		);
 	},

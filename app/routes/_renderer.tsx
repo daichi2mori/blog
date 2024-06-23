@@ -2,15 +2,18 @@ import { CustomScript } from "app/components/custom-script";
 import Footer from "app/components/footer";
 import Header from "app/components/header";
 import { Style } from "hono/css";
-import { jsxRenderer } from "hono/jsx-renderer";
+import { jsxRenderer, useRequestContext } from "hono/jsx-renderer";
 import { Link, Script } from "honox/server";
 import { SiteConfig } from "site.config";
 
-export default jsxRenderer(({ children, title, desc }) => {
+export default jsxRenderer(({ children, title, desc, slug }) => {
+	const c = useRequestContext();
+	const currentUrl = c.req.url;
 	const pageTitle = title
 		? `${title} - ${SiteConfig.blogName}`
 		: SiteConfig.blogName;
 	const description = desc ?? SiteConfig.description;
+	const ogpPath = slug ? `/ogps/${slug}.png` : "/ogp.png";
 
 	return (
 		<html lang="ja">
@@ -19,6 +22,23 @@ export default jsxRenderer(({ children, title, desc }) => {
 				<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 				<title>{pageTitle}</title>
 				<meta name="description" content={description} />
+				<meta property="og:url" content={currentUrl} />
+				<meta property="og:type" content="article" />
+				<meta property="og:title" content={pageTitle} />
+				<meta property="og:description" content={description} />
+				<meta property="og:site_name" content={pageTitle} />
+				<meta
+					property="og:image"
+					content={`https://blog.daichi2mori.com/${ogpPath}`}
+				/>
+				<meta name="twitter:card" content="summary_large_image" />
+				<meta name="twitter:site" content="@daichi2mori" />
+				<meta name="twitter:title" content={pageTitle} />
+				<meta name="twitter:description" content={description} />
+				<meta
+					name="twitter:image"
+					content={`https://blog.daichi2mori.com/${ogpPath}`}
+				/>
 				<link rel="icon" href="/favicon.ico" />
 				<CustomScript src="/app/theme.ts" />
 				<Link href="/app/styles/style.css" rel="stylesheet" />

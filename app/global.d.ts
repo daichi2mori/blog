@@ -3,6 +3,7 @@ import {} from "hono";
 type Head = {
 	title?: string;
 	desc?: string;
+	slug?: string;
 };
 
 declare module "hono" {
