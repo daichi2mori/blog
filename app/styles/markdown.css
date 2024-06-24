@@ -66,6 +66,10 @@
   @apply text-sm font-semibold text-zinc-200 bg-zinc-700 rounded-t-md py-2 px-3;
 }
 
+.markdown > p > code {
+  @apply bg-background dark:bg-slate-700 rounded;
+}
+
 .markdown code:not([data-theme="moonlight-ii"]) {
   @apply font-mono text-sm inline px-1.5 py-1 mx-0.5 tracking-wide;
 }
