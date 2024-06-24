@@ -29,15 +29,13 @@ export default createRoute(
 				<div class={"relative"}>
 					<h1
 						class={
-							"text-3xl md:text-[2.5rem]/[2.75rem] font-bold md:before:w-1 md:before:h-5 md:before:rounded-md md:before:bg-primary md:before:absolute md:before:top-[0.75rem] md:before:left-[-1.125rem]"
+							"text-2xl md:text-4xl font-bold md:before:w-1 md:before:h-5 md:before:rounded-md md:before:bg-primary md:before:absolute md:before:top-[0.75rem] md:before:left-[-1.125rem]"
 						}
 					>
 						{post?.title}
 					</h1>
 				</div>
-				<div class={"border-b-[1px] pb-5"}>
-					<Publish published={post?.published} modified={post?.modified} />
-				</div>
+				<Publish published={post?.published} modified={post?.modified} />
 				<div class={"markdown"}>{post?.Component({})}</div>
 			</article>,
 			{

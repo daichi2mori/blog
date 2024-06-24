@@ -35,11 +35,11 @@
 }
 
 .markdown h1 {
-  @apply leading-tight text-3xl mb-0 mt-6 pb-2 font-bold;
+  @apply leading-tight text-3xl mb-0 mt-6 pb-2 font-bold border-b;
 }
 
 .markdown h2 {
-  @apply leading-tight text-2xl mb-4 mt-6 pb-2 font-bold;
+  @apply leading-tight text-2xl mb-4 mt-6 pb-2 font-bold border-b;
 }
 
 .markdown h3 {
