@@ -6,10 +6,10 @@ import client from "honox/vite/client";
 import rehypePrettyCode from "rehype-pretty-code";
 import rehypeStringify from "rehype-stringify";
 import remarkFrontmatter from "remark-frontmatter";
+import { remarkAlert } from "remark-github-blockquote-alert";
 import remarkMdxFrontmatter from "remark-mdx-frontmatter";
 import remarkParse from "remark-parse";
 import remarkRehype from "remark-rehype";
-import remarkUnwrapImages from "remark-unwrap-images";
 import { defineConfig, normalizePath } from "vite";
 import { viteStaticCopy } from "vite-plugin-static-copy";
 import tsconfigPaths from "vite-tsconfig-paths";
@@ -41,7 +41,7 @@ export default defineConfig(({ mode }) => {
 				remarkPlugins: [
 					remarkFrontmatter,
 					remarkMdxFrontmatter,
-					remarkUnwrapImages,
+					remarkAlert,
 					remarkRehype,
 					remarkParse,
 				],
