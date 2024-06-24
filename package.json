@@ -28,6 +28,7 @@
   },
   "devDependencies": {
     "@biomejs/biome": "^1.8.1",
+    "@clack/prompts": "^0.7.0",
     "@cloudflare/workers-types": "^4.20240529.0",
     "@hono/vite-cloudflare-pages": "^0.4.0",
     "@hono/vite-dev-server": "^0.12.1",
