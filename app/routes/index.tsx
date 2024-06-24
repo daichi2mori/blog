@@ -12,19 +12,20 @@ export default createRoute((c) => {
 				<Fragment key={post.slug}>
 					<div
 						class={
-							"relative bg-card rounded-[16px] py-3 pr-6 md:pr-3 pl-6 md:pl-9 grid grid-cols-[1fr_3.25rem]"
+							"relative bg-card rounded-[16px] py-3 pr-6 md:pr-3 pl-6 md:pl-9 grid md:grid-cols-[1fr_3.25rem]"
 						}
 					>
-						<div class={"flex flex-col gap-3 py-3"}>
+						<div class={"flex flex-col gap-3 md:py-3"}>
 							<a
 								href={`/posts/${post.slug}`}
 								class={
-									"w-fit text-3xl font-bold duration-200 hover:text-primary before:w-1 before:h-5 before:rounded-md before:bg-primary before:absolute before:top-[35px] before:left-[18px] before:hidden md:before:block"
+									"w-fit text-2xl md:text-3xl font-bold duration-200 hover:text-primary before:w-1 before:h-5 before:rounded-md before:bg-primary before:absolute before:top-[35px] before:left-[18px] before:hidden md:before:block"
 								}
 							>
 								{post.title}
+								<span className="absolute inset-0 md:hidden" />
 							</a>
-							<p>{post.description}</p>
+							<p class={"text-sm md:text-base"}>{post.description}</p>
 							<Publish published={post.published} modified={post.modified} />
 						</div>
 
