@@ -1,4 +1,4 @@
-import { CustomScript } from "app/components/custom-script";
+import { CustomScript } from "app/components/customScript";
 import Footer from "app/components/footer";
 import Header from "app/components/header";
 import { Style } from "hono/css";
