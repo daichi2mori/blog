@@ -3,6 +3,7 @@ import ssg from "@hono/vite-ssg";
 import mdx from "@mdx-js/rollup";
 import honox from "honox/vite";
 import client from "honox/vite/client";
+import rehypeExternalLinks from "rehype-external-links";
 import rehypePrettyCode from "rehype-pretty-code";
 import rehypeStringify from "rehype-stringify";
 import remarkFrontmatter from "remark-frontmatter";
@@ -46,6 +47,13 @@ export default defineConfig(({ mode }) => {
 					remarkParse,
 				],
 				rehypePlugins: [
+					[
+						rehypeExternalLinks,
+						{
+							rel: ["noreferrer"],
+							target: ["_blank"],
+						},
+					],
 					rehypeStringify,
 					[rehypePrettyCode, { theme: "dark-plus", keepBackground: false }],
 				],
