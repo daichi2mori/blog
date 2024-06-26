@@ -1,5 +1,5 @@
 .markdown {
-  @apply dark:text-gray-100 break-words box-border tracking-wide w-full;
+  @apply dark:text-gray-100 break-words tracking-wide w-full;
 }
 
 .markdown > * + * {
@@ -123,7 +123,7 @@
   @apply border py-1 px-3;
 }
 
-.markdown img {
+.markdown > p > img {
   @apply aspect-auto;
 }
 

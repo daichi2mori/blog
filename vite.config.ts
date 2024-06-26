@@ -39,6 +39,7 @@ export default defineConfig(({ mode }) => {
 			honox(),
 			mdx({
 				jsxImportSource: "hono/jsx",
+				providerImportSource: "./app/components/mdx",
 				remarkPlugins: [
 					remarkFrontmatter,
 					remarkMdxFrontmatter,
@@ -85,7 +86,7 @@ export default defineConfig(({ mode }) => {
 		],
 
 		ssr: {
-			external: ["satori", "@resvg/resvg-js", "budoux"],
+			external: ["satori", "@resvg/resvg-js", "budoux", "jsdom"],
 		},
 	};
 });

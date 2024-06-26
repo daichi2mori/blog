@@ -1,4 +1,6 @@
 /** @type {import('tailwindcss').Config} */
+import defaultTheme from "tailwindcss/defaultTheme";
+
 export default {
   darkMode: "class",
   content: ["./app/**/*.tsx"],
@@ -9,6 +11,10 @@ export default {
       screens: {
         "2xl": "1400px",
       },
+    },
+    screens: {
+      xs: "523px",
+      ...defaultTheme.screens,
     },
     extend: {
       colors: {
