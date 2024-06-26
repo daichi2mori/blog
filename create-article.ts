@@ -1,4 +1,4 @@
-import { cancel, isCancel, outro, text } from "@clack/prompts";
+import { cancel, isCancel, outro, select, text } from "@clack/prompts";
 import { $, write } from "bun";
 
 // slug入力
@@ -15,6 +15,7 @@ if (isCancel(slug)) {
 	cancel("goodbye");
 }
 
+// 作成時の日付を取得
 const today = new Date()
 	.toLocaleDateString("ja-JP", {
 		year: "numeric",
@@ -23,20 +24,31 @@ const today = new Date()
 	})
 	.replaceAll("/", "-");
 
+// 拡張子選択
+const extension = await select({
+	message: "作成するファイル拡張子を選択してください",
+	options: [
+		{ value: "md", label: "md" },
+		{ value: "mdx", label: "mdx" },
+	],
+});
+
+if (isCancel(extension)) {
+	cancel("goodbye");
+}
+
 const dirname = `${today.replaceAll("-", "")}-${String(slug)}`;
-
-// ディレクトリとファイルを作成
-await $`mkdir ./app/posts/${dirname}`;
-await $`touch ./app/posts/${dirname}/index.md`;
-
+const createFilePath = `./app/posts/${dirname}/index.${extension}`;
 const frontmatter = `---
 title:
 description:
-published:
+published: '${today}'
 modified:
 ---
 `;
 
-await write(`./app/posts/${dirname}/index.md`, frontmatter);
+await $`mkdir ./app/posts/${dirname}`;
+await $`touch ${createFilePath}`;
+await write(createFilePath, frontmatter);
 
 outro(`./app/posts/${dirname}/index.md is created`);
