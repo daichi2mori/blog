@@ -47,7 +47,7 @@
 }
 
 .markdown h4 {
-  @apply leading-none text-base mb-4 mt-6;
+  @apply leading-none text-base font-semibold mb-4 mt-6;
 }
 
 .markdown h5 {
@@ -125,4 +125,8 @@
 
 .markdown img {
   @apply aspect-auto;
+}
+
+.markdown > p > a {
+  @apply underline text-blue-500 dark:text-blue-400;
 }
