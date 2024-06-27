@@ -40,6 +40,13 @@ export const fetchOgp = async (url: string) => {
 					?.getAttribute("content") || undefined;
 		}
 
+		if (!ogpData.image) {
+			ogpData.image =
+				document
+					.querySelector('meta[name="og:image"]')
+					?.getAttribute("content") || undefined;
+		}
+
 		return ogpData;
 	} catch (e) {
 		if (e instanceof Error) {
