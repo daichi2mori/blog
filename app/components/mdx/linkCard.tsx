@@ -10,7 +10,7 @@ const LinkCard = async ({ url }: { url: string }) => {
 			target="_blank"
 			rel="noreferrer"
 			class={
-				"w-full h-32 sm:h-36 md:h-40 flex border rounded-lg overflow-hidden transition-opacity hover:opacity-65"
+				"w-full h-32 sm:h-36 md:h-40 flex justify-between border rounded-lg overflow-hidden transition-opacity hover:opacity-65"
 			}
 		>
 			<div class={"px-3 py-3 md:px-6 md:py-4 flex flex-col justify-between"}>
