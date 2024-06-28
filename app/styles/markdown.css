@@ -104,7 +104,7 @@
 }
 
 .markdown ol {
-  @apply text-base pl-5 mt-5 mb-4 list-decimal marker:text-lg marker:font-semibold marker:text-neutral-600;
+  @apply text-base pl-5 mt-5 mb-4 list-decimal marker:text-lg marker:font-semibold marker:text-neutral-600 marker:dark:text-neutral-400;
 }
 
 .markdown kbd {
