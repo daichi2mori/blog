@@ -70,12 +70,12 @@
   @apply bg-background dark:bg-slate-700 rounded;
 }
 
-.markdown code:not([data-theme="moonlight-ii"]) {
+.markdown code:not([data-theme="dark-plus"]) {
   @apply font-mono text-sm inline px-1.5 py-1 mx-0.5 tracking-wide;
 }
 
-.markdown code[data-theme="moonlight-ii"] {
-  @apply font-mono text-sm;
+.markdown code[data-theme="dark-plus"] {
+  @apply font-mono text-sm cursor-text;
 }
 .markdown pre {
   @apply py-3 rounded-b-md overflow-x-auto bg-[#080d11];
@@ -86,7 +86,7 @@
 }
 
 .markdown pre code span[data-line] {
-  @apply px-5;
+  @apply px-4;
 }
 
 .markdown code[data-line-numbers] {
@@ -94,7 +94,7 @@
 }
 
 .markdown code[data-line-numbers] > span[data-line]::before {
-  @apply mr-3 inline-block w-4 text-gray-500
+  @apply mr-5 inline-block w-6 text-right text-gray-500
     content-[counter(lineNumber)]
     [counter-increment:lineNumber];
 }
