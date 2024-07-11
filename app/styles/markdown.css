@@ -26,10 +26,6 @@
   @apply text-base leading-7 mt-1 mb-0;
 }
 
-.markdown blockquote > p {
-  @apply text-sm
-}
-
 .markdown h1 {
   @apply leading-tight text-3xl mb-0 mt-12 pb-1.5 font-bold border-b dark:border-gray-400;
 }
@@ -54,29 +50,14 @@
   @apply leading-tight text-sm font-semibold text-gray-600 mb-4 mt-6;
 }
 
-.markdown blockquote {
-  @apply text-sm my-5 pl-4 pr-4 border-l-4 border-gray-300 text-gray-600 dark:text-gray-300;
-}
-
-.markdown figure[data-rehype-pretty-code-figure] {
+.markdown > figure[data-rehype-pretty-code-figure] {
   @apply my-5
 }
 
-.markdown figure figcaption {
-  @apply text-sm font-semibold text-zinc-200 bg-zinc-700 rounded-t-md py-2 px-3;
+.markdown > figure > figcaption[data-rehype-pretty-code-title] {
+  @apply text-xs font-semibold text-zinc-200 bg-zinc-700 rounded-t-md py-2 px-3;
 }
 
-.markdown > p > code {
-  @apply bg-background dark:bg-slate-700 rounded;
-}
-
-.markdown code:not([data-theme="dark-plus"]) {
-  @apply font-mono text-sm inline px-1.5 py-1 mx-0.5 tracking-wide;
-}
-
-.markdown code[data-theme="dark-plus"] {
-  @apply font-mono text-sm cursor-text;
-}
 .markdown pre {
   @apply py-3 rounded-b-md overflow-x-auto bg-[#080d11];
 }
@@ -85,12 +66,20 @@
   @apply rounded-t-md;
 }
 
-.markdown pre code span[data-line] {
-  @apply px-4;
+.markdown code {
+  @apply text-sm cursor-text;
+}
+
+.markdown > p > code {
+  @apply inline px-1.5 py-1 mx-0.5 bg-background dark:bg-slate-700 rounded;
 }
 
 .markdown code[data-line-numbers] {
   @apply [counter-reset:lineNumber];
+}
+
+.markdown pre code span[data-line] {
+  @apply px-4;
 }
 
 .markdown code[data-line-numbers] > span[data-line]::before {
