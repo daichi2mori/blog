@@ -6,7 +6,6 @@ import client from "honox/vite/client";
 import rehypeExternalLinks from "rehype-external-links";
 import rehypePrettyCode from "rehype-pretty-code";
 import rehypeStringify from "rehype-stringify";
-import remarkBreaks from "remark-breaks";
 import remarkFrontmatter from "remark-frontmatter";
 import { remarkAlert } from "remark-github-blockquote-alert";
 import remarkMdxFrontmatter from "remark-mdx-frontmatter";
@@ -45,7 +44,6 @@ export default defineConfig(({ mode }) => {
 					remarkFrontmatter,
 					remarkMdxFrontmatter,
 					remarkAlert,
-					remarkBreaks,
 					remarkRehype,
 					remarkParse,
 				],
