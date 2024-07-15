@@ -117,7 +117,7 @@
 }
 
 .markdown > p > img {
-  @apply aspect-auto max-w-md;
+  @apply aspect-auto w-full max-w-md;
 }
 
 .markdown > p > a {
