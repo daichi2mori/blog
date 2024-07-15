@@ -1,0 +1,41 @@
+---
+title: 'VSCodeにGo言語の拡張機能を追加する'
+description: 'VSCodeにGo言語の拡張機能を追加することによってIntelliSenseやコードナビゲーション、デバッグ機能が使えます。'
+published: '2024-07-15'
+modified:
+---
+
+## 参考サイト
+
+Go言語のインストール方法はこちら（Windows環境の場合）
+<LinkCard url="https://blog.daichi2mori.com/posts/20240714-windows-golang-install" />
+
+VSCodeの拡張機能はこちら
+<LinkCard url="https://learn.microsoft.com/ja-jp/azure/developer/go/configure-visual-studio-code" />
+
+
+## 拡張機能のインストール
+
+VSCodeの拡張機能アイコンをクリックして`golang.go`と検索します。
+Goと書かれた拡張機能をクリックします。
+
+![拡張機能の検索](/static/search-golang-extensions.png)
+
+以下のようなタブが開きますので、インストールボタンをクリックします。
+
+![拡張機能のインストール](/static/golang-extensions-install.png)
+
+インストールが完了後はVSCodeを再起動する。
+
+
+## 拡張機能の更新
+
+コマンドパレット（Ctrl + Shift + P）を開き`Go: Install/Update tools`を検索して実行する。
+
+ツール一覧が表示されるので、すべてを選択して「OK」をクリックします。
+
+![Go拡張機能のアップデート](/static/golang-extension-update.png)
+
+すべてのアップデートが完了すると以下のように表示されます。
+
+![Go拡張機能のアップデート完了](/static/golang-extensions-update-completed.png)
