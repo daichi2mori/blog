@@ -70,7 +70,7 @@
   @apply text-sm cursor-text;
 }
 
-.markdown > p > code {
+.markdown p > code {
   @apply inline px-1.5 py-1 mx-0.5 bg-background dark:bg-slate-700 rounded;
 }
 
@@ -93,7 +93,7 @@
 }
 
 .markdown ol {
-  @apply text-base pl-5 mt-5 mb-4 list-decimal marker:text-lg marker:font-semibold marker:text-neutral-600 marker:dark:text-neutral-400;
+  @apply text-lg pl-5 mt-5 mb-4 list-decimal marker:text-lg marker:font-semibold marker:text-neutral-600 marker:dark:text-neutral-400;
 }
 
 .markdown kbd {
