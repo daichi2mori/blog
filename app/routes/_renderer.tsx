@@ -40,6 +40,20 @@ export default jsxRenderer(({ children, title, desc, slug }) => {
 					content={`https://blog.daichi2mori.com/${ogpPath}`}
 				/>
 				<link rel="icon" href="/favicon.ico" />
+				<link rel="preconnect" href="https://fonts.googleapis.com" />
+				<link rel="preconnect" href="https://fonts.gstatic.com" />
+				<link
+					rel="preload"
+					as="style"
+					fetchpriority="high"
+					href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100..900&display=swap"
+				/>
+				<link
+					rel="stylesheet"
+					href="{href}"
+					media="print"
+					onload='this.media="all"'
+				/>
 				<CustomScript src="/app/theme.ts" />
 				<Link href="/app/styles/style.css" rel="stylesheet" />
 				<Script src="/app/client.ts" async />
