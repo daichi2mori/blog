@@ -50,7 +50,7 @@ export default jsxRenderer(({ children, title, desc, slug }) => {
 				/>
 				<link
 					rel="stylesheet"
-					href="{href}"
+					href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100..900&display=swap"
 					media="print"
 					onload='this.media="all"'
 				/>
