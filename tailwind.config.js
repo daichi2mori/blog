@@ -1,4 +1,5 @@
 /** @type {import('tailwindcss').Config} */
+import plugin from "tailwindcss";
 import defaultTheme from "tailwindcss/defaultTheme";
 
 export default {
@@ -60,5 +61,9 @@ export default {
       },
     },
   },
-  plugins: [],
+  plugins: [
+    plugin(({ addVariant }) => {
+      addVariant("hover", "@media(hover:hover){ &:where(:any-link, :enabled, summary):hover }");
+    }),
+  ],
 };
