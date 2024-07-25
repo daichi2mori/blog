@@ -89,28 +89,29 @@ starship config
 
 [https://starship.rs/ja-JP/config/](https://starship.rs/ja-JP/config/)
 
-```zsh title='~/.config/starship.toml'
+```toml title="~/.config/starship.toml"
+# エディターの補完を設定スキーマに合わせて取得
 "$schema" = 'https://starship.rs/config-schema.json'
 
 add_newline = true
 
 [directory]
-format = "[$path](bold cyan) "
+format = "[$path]($style) "
 truncation_length = 8
 truncation_symbol = "..."
 truncate_to_repo = false
 
 [git_branch]
-format = 'on [$symbol$branch](bold purple)'
+format = "on [$symbol$branch]($style) "
 
 [bun]
-format = 'via [$symbol$version](bold green)'
+format = "via [$symbol$version]($style) "
 
 [nodejs]
-format = 'via [$symbol$version](bold green)'
-detect_extensions = ['js', 'mjs', 'cjs', 'ts', 'mts', 'cts']
-detect_files = ['package.json', '.node-version', '!bunfig.toml', '!bun.lockb']
-detect_folders = ['node_modules']
+format = "via [$symbol$version]($style) "
+detect_extensions = ["js", "mjs", "cjs", "ts", "mts", "cts"]
+detect_files = ["package.json", ".node-version", "!bunfig.toml", "!bun.lockb"]
+detect_folders = ["node_modules"]
 ```
 
 
