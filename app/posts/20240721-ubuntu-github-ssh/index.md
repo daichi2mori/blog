@@ -41,12 +41,12 @@ GitHubの右上のアイコンをクリックし、「Settings」ページに遷
 その後左メニューに「SSH and GPG keys」があるのでクリックします。
 すると「New SSH key」ボタンがあるのでクリックします。
 
-![ssh page](/static/ssh-page.png)
+![ssh page](/static/ssh-page.avif)
 
 以下画像の画面に遷移後Titleに自分がわかりやすい名前を記入し、keyには`id_rsa.pub`の内容をすべてコピペします。
 「key type」は「Authentication Key」のままで大丈夫です。
 
-![add ssh key](/static/add-ssh-key.png)
+![add ssh key](/static/add-ssh-key.avif)
 
 
 4. SSH接続の確認

@@ -67,6 +67,7 @@ export default defineConfig(({ mode }) => {
 							"./app/posts/**/*.jpg",
 							"./app/posts/**/*.jpeg",
 							"./app/posts/**/*.webp",
+							"./app/posts/**/*.avif",
 							"./app/posts/**/*.gif",
 						],
 						dest: "static",
