@@ -103,7 +103,7 @@ func main() {
 パッケージ名が違うので、エクスポートするには関数名の最初の文字を大文字にする必要があります。これは変数名でも一緒です。
 
 ```go title="bar/bar.go"
-package main
+package bar
 
 import "fmt"
 
