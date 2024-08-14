@@ -40,6 +40,8 @@ export default jsxRenderer(({ children, title, desc, slug }) => {
 					content={`https://blog.daichi2mori.com/${ogpPath}`}
 				/>
 				<link rel="icon" href="/favicon.ico" />
+				<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+				<link rel="manifest" href="/site.webmanifest" />
 				<link rel="preconnect" href="https://fonts.googleapis.com" />
 				<link rel="preconnect" href="https://fonts.gstatic.com" />
 				<link
