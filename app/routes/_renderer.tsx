@@ -49,7 +49,7 @@ export default jsxRenderer(({ children, title, desc, slug }) => {
 			<body>
 				<div
 					class={
-						"grid grid-rows-[1fr_auto] gap-4 min-h-dvh max-w-[600px] mx-auto"
+						"grid grid-rows-[1fr_auto] gap-6 min-h-dvh max-w-[600px] mx-auto"
 					}
 				>
 					<main class={"min-w-0"}>{children}</main>

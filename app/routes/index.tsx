@@ -5,7 +5,7 @@ export default createRoute((c) => {
 	const postCount = getPosts();
 
 	return c.render(
-		<div class={"grid grid-cols-2 gap-7 mt-12 px-6"}>
+		<div class={"grid grid-cols-2 gap-7 mt-6 md:mt-12 px-6"}>
 			{/* Profile */}
 			<div
 				class={"flex flex-col items-center p-6 bg-white rounded-3xl col-span-2"}
@@ -14,9 +14,9 @@ export default createRoute((c) => {
 					<img
 						src="/static/profile.avif"
 						alt="profile"
-						class={"rounded-full aspect-square w-24 md:w-32"}
+						class={"rounded-full aspect-square w-20 md:w-32"}
 					/>
-					<div class={"mt-5 md:mt-6 ml-2"}>
+					<div class={"mt-4 md:mt-6 ml-2"}>
 						<h2 class={"text-2xl md:text-3xl font-bold"}>Daichi Mori</h2>
 						<p class={"text-sm md:text-base mt-2 md:mt-3 text-[#565656]"}>
 							I'm a front-end developer and can do a little back-end as well.
@@ -53,24 +53,25 @@ export default createRoute((c) => {
 			>
 				<svg
 					xmlns="http://www.w3.org/2000/svg"
-					viewBox="0 0 64 64"
-					stroke-width="3"
-					stroke="currentColor"
-					fill="none"
-					class="w-16 md:w-32"
+					viewBox="0 0 24 24"
+					stroke-width="1.5"
+					class="w-16 md:w-32 stroke-gray-800 fill-none"
 				>
 					<title>blog</title>
-					<polygon
-						points="25.15 7.74 50.81 7.74 50.81 56.26 13.19 56.26 13.19 20.6 25.15 7.74"
-						stroke-linecap="round"
-					/>
-					<polyline points="25.17 7.74 25.15 20.6 13.19 20.6" />
-					<line x1="18.34" y1="47.67" x2="35.35" y2="47.67" />
-					<line x1="18.34" y1="41.14" x2="45.35" y2="41.14" />
-					<line x1="18.34" y1="35.04" x2="45.35" y2="35.04" />
-					<line x1="18.34" y1="28.94" x2="45.35" y2="28.94" />
+					<path d="M2 6h4" />
+					<path d="M2 10h4" />
+					<path d="M2 14h4" />
+					<path d="M2 18h4" />
+					<rect width="16" height="20" x="4" y="2" rx="2" />
+					<path d="M9.5 8h5" />
+					<path d="M9.5 12H16" />
+					<path d="M9.5 16H14" />
 				</svg>
-				<p class={"grow text-center font-extrabold text-2xl md:text-4xl"}>
+				<p
+					class={
+						"grow text-gray-800 text-center font-extrabold text-2xl md:text-4xl"
+					}
+				>
 					Blog
 				</p>
 			</a>
