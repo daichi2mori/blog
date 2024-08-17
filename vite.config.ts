@@ -63,6 +63,7 @@ export default defineConfig(({ mode }) => {
 				targets: [
 					{
 						src: [
+							"./app/*.png",
 							"./app/posts/**/*.png",
 							"./app/posts/**/*.jpg",
 							"./app/posts/**/*.jpeg",
