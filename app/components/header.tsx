@@ -76,6 +76,8 @@ const Header = () => {
 				<ThemeButton />
 				<a
 					href="https://x.com/daichi2mori"
+					target="_blank"
+					rel="noreferrer"
 					class={
 						"w-11 h-11 grid place-items-center rounded-lg group duration-300 hover:bg-secondary"
 					}
@@ -94,6 +96,8 @@ const Header = () => {
 				</a>
 				<a
 					href="https://github.com/daichi2mori"
+					target="_blank"
+					rel="noreferrer"
 					class={
 						"w-11 h-11 grid place-items-center rounded-lg group duration-300 hover:bg-secondary"
 					}
