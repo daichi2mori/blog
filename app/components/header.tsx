@@ -75,7 +75,7 @@ const Header = () => {
 			<div class={"flex items-center justify-end gap-3"}>
 				<ThemeButton />
 				<a
-					href="https://x.com/da1ch7"
+					href="https://x.com/daichi2mori"
 					class={
 						"w-11 h-11 grid place-items-center rounded-lg group duration-300 hover:bg-secondary"
 					}
