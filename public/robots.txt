@@ -1,0 +1,6 @@
+# すべてのページをクロール許可
+User-agent: *
+Disallow:
+
+# クローラーにサイトマップの場所を通知
+# Sitemap: https://example.com/sitemap.xml
