@@ -1,6 +1,5 @@
 import { CustomScript } from "app/components/customScript";
 import Footer from "app/components/footer";
-import Header from "app/components/header";
 import { Style } from "hono/css";
 import { jsxRenderer, useRequestContext } from "hono/jsx-renderer";
 import { Link, Script } from "honox/server";
@@ -23,22 +22,16 @@ export default jsxRenderer(({ children, title, desc, slug }) => {
 				<title>{pageTitle}</title>
 				<meta name="description" content={description} />
 				<meta property="og:url" content={currentUrl} />
-				<meta property="og:type" content="article" />
+				<meta property="og:type" content="website" />
 				<meta property="og:title" content={pageTitle} />
 				<meta property="og:description" content={description} />
 				<meta property="og:site_name" content={pageTitle} />
-				<meta
-					property="og:image"
-					content={`https://blog.daichi2mori.com/${ogpPath}`}
-				/>
+				<meta property="og:image" content={`${currentUrl}/${ogpPath}`} />
 				<meta name="twitter:card" content="summary_large_image" />
 				<meta name="twitter:site" content="@daichi2mori" />
 				<meta name="twitter:title" content={pageTitle} />
 				<meta name="twitter:description" content={description} />
-				<meta
-					name="twitter:image"
-					content={`https://blog.daichi2mori.com/${ogpPath}`}
-				/>
+				<meta name="twitter:image" content={`${currentUrl}/${ogpPath}`} />
 				<link rel="icon" href="/favicon.ico" />
 				<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 				<link rel="manifest" href="/site.webmanifest" />
@@ -56,11 +49,9 @@ export default jsxRenderer(({ children, title, desc, slug }) => {
 			<body>
 				<div
 					class={
-						"grid grid-rows-[auto_1fr_auto] gap-4 min-h-dvh max-w-[1000px] my-0 mx-auto md:px-4"
+						"grid grid-rows-[1fr_auto] gap-4 min-h-dvh max-w-[600px] mx-auto"
 					}
 				>
-					<Header />
-					{/* <Sidebar /> */}
 					<main class={"min-w-0"}>{children}</main>
 					<Footer />
 				</div>

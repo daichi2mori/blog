@@ -1,59 +1,115 @@
-import Publish from "app/components/published";
 import { getPosts } from "app/lib/posts";
-import { Fragment } from "hono/jsx/jsx-runtime";
 import { createRoute } from "honox/factory";
 
 export default createRoute((c) => {
-	const posts = getPosts();
+	const postCount = getPosts();
 
 	return c.render(
-		<div class={"flex flex-col gap-3"}>
-			{posts.map((post) => (
-				<Fragment key={post.slug}>
-					<div
-						class={
-							"relative bg-card rounded-[16px] py-3 pr-6 md:pr-3 pl-6 md:pl-9 grid md:grid-cols-[1fr_3.25rem]"
-						}
-					>
-						<div class={"flex flex-col gap-3 md:py-3 md:pr-5"}>
-							<a
-								href={`/posts/${post.slug}`}
-								class={
-									"w-fit text-2xl md:text-3xl font-bold duration-200 hover:text-primary before:w-1 before:h-5 before:rounded-md before:bg-primary before:absolute before:top-[35px] before:left-[18px] before:hidden md:before:block"
-								}
-							>
-								{post.title}
-								<span className="absolute inset-0 md:hidden" />
-							</a>
-							<p class={"text-sm md:text-base"}>{post.description}</p>
-							<Publish published={post.published} modified={post.modified} />
-						</div>
-
+		<div class={"grid grid-cols-2 gap-7 mt-12 px-6"}>
+			{/* Profile */}
+			<div
+				class={"flex flex-col items-center p-6 bg-white rounded-3xl col-span-2"}
+			>
+				<div>
+					<img
+						src="/static/profile.avif"
+						alt="profile"
+						class={"rounded-full aspect-square w-24 md:w-32"}
+					/>
+					<div class={"mt-5 md:mt-6 ml-2"}>
+						<h2 class={"text-2xl md:text-3xl font-bold"}>Daichi Mori</h2>
+						<p class={"text-sm md:text-base mt-2 md:mt-3 text-[#565656]"}>
+							I'm a front-end developer and can do a little back-end as well.
+						</p>
 						<a
-							href={`/posts/${post.slug}`}
-							class={
-								"hidden md:grid place-items-center rounded-xl bg-btn duration-300 hover:bg-btn-hover"
-							}
+							href="/about"
+							class={"mt-2 flex items-center w-fit hover:text-primary group"}
 						>
+							About me
 							<svg
 								xmlns="http://www.w3.org/2000/svg"
-								width="24"
-								height="24"
-								viewBox="0 0 24 24"
+								width="20"
+								height="20"
+								viewBox="0 -2.5 24 24"
 								fill="none"
-								stroke="currentColor"
-								stroke-width="3"
-								stroke-linecap="round"
-								stroke-linejoin="round"
-								class="stroke-primary"
+								stroke="none"
+								stroke-width="2"
+								class="stroke-foreground group-hover:stroke-primary"
 							>
-								<title>Right Arrow Icon</title>
-								<path d="m9 18 6-6-6-6" />
+								<title>arrow</title>
+								<path d="M5 12h14" />
+								<path d="m12 5 7 7-7 7" />
 							</svg>
 						</a>
 					</div>
-				</Fragment>
-			))}
+				</div>
+			</div>
+			{/* Blog */}
+			<a
+				href="/blog"
+				class={
+					"col-span-2 p-6 rounded-3xl flex items-center bg-blog-gradient transform hover:scale-105 transition duration-200 ease-in-out"
+				}
+			>
+				<svg
+					xmlns="http://www.w3.org/2000/svg"
+					viewBox="0 0 64 64"
+					stroke-width="3"
+					stroke="currentColor"
+					fill="none"
+					class="w-16 md:w-32"
+				>
+					<title>blog</title>
+					<polygon
+						points="25.15 7.74 50.81 7.74 50.81 56.26 13.19 56.26 13.19 20.6 25.15 7.74"
+						stroke-linecap="round"
+					/>
+					<polyline points="25.17 7.74 25.15 20.6 13.19 20.6" />
+					<line x1="18.34" y1="47.67" x2="35.35" y2="47.67" />
+					<line x1="18.34" y1="41.14" x2="45.35" y2="41.14" />
+					<line x1="18.34" y1="35.04" x2="45.35" y2="35.04" />
+					<line x1="18.34" y1="28.94" x2="45.35" y2="28.94" />
+				</svg>
+				<p class={"grow text-center font-extrabold text-2xl md:text-4xl"}>
+					Blog
+				</p>
+			</a>
+			{/* Twitter */}
+			<a
+				href="https://x.com/daichi2mori"
+				target="_blank"
+				rel="noreferrer"
+				class={
+					"p-6 bg-twitter-gradient rounded-3xl aspect-square grid place-items-center transform hover:scale-105 transition duration-200 ease-in-out"
+				}
+			>
+				<svg
+					xmlns="http://www.w3.org/2000/svg"
+					viewBox="-89.00934757 -46.8841404 643.93723344 446.8841404"
+					class="fill-[#ffffff] w-16 md:w-32"
+				>
+					<title>twitter</title>
+					<path d="m154.729 400c185.669 0 287.205-153.876 287.205-287.312 0-4.37-.089-8.72-.286-13.052a205.304 205.304 0 0 0 50.352-52.29c-18.087 8.044-37.55 13.458-57.968 15.899 20.841-12.501 36.84-32.278 44.389-55.852a202.42 202.42 0 0 1 -64.098 24.511c-18.42-19.628-44.644-31.904-73.682-31.904-55.744 0-100.948 45.222-100.948 100.965 0 7.925.887 15.631 2.619 23.025-83.895-4.223-158.287-44.405-208.074-105.504a100.739 100.739 0 0 0 -13.668 50.754c0 35.034 17.82 65.961 44.92 84.055a100.172 100.172 0 0 1 -45.716-12.63c-.015.424-.015.837-.015 1.29 0 48.903 34.794 89.734 80.982 98.986a101.036 101.036 0 0 1 -26.617 3.553c-6.493 0-12.821-.639-18.971-1.82 12.851 40.122 50.115 69.319 94.296 70.135-34.549 27.089-78.07 43.224-125.371 43.224a204.9 204.9 0 0 1 -24.078-1.399c44.674 28.645 97.72 45.359 154.734 45.359" />
+				</svg>
+			</a>
+			{/* GitHub */}
+			<a
+				href="https://github.com/daichi2mori"
+				target="_blank"
+				rel="noreferrer"
+				class={
+					"p-6 rounded-3xl aspect-square bg-github-gradient grid place-items-center transform hover:scale-105 transition duration-200 ease-in-out"
+				}
+			>
+				<svg
+					xmlns="http://www.w3.org/2000/svg"
+					viewBox="0 0 1000 1000"
+					class="fill-[#ffffff] w-16 md:w-32"
+				>
+					<title>github</title>
+					<path d="M500,121c-214.58,0-388.59,174-388.59,388.58,0,171.69,111.35,317.35,265.74,368.74,19.42,3.59,26.56-8.43,26.56-18.7,0-9.26-.37-39.88-.53-72.35-108.11,23.51-130.92-45.84-130.92-45.84-17.68-44.92-43.15-56.86-43.15-56.86-35.25-24.12,2.66-23.63,2.66-23.63,39,2.75,59.57,40,59.57,40,34.66,59.41,90.9,42.23,113.08,32.3,3.49-25.11,13.56-42.25,24.67-52-86.31-9.83-177-43.15-177-192,0-42.42,15.18-77.09,40-104.3-4-9.79-17.34-49.31,3.76-102.84,0,0,32.63-10.44,106.89,39.83a368.75,368.75,0,0,1,194.61,0c74.17-50.27,106.75-39.83,106.75-39.83,21.15,53.53,7.85,93,3.81,102.84,24.92,27.21,40,61.87,40,104.3C747.9,638.55,657,671.41,570.47,681c13.94,12.06,26.36,35.71,26.36,72,0,52-.45,93.84-.45,106.64,0,10.34,7,22.46,26.69,18.64,154.31-51.44,265.52-197,265.52-368.68C888.59,295,714.61,121,500,121" />
+				</svg>
+			</a>
 		</div>,
 	);
 });

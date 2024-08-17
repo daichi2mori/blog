@@ -67,7 +67,7 @@
 
 @layer base {
   body {
-    @apply bg-background text-foreground box-border font-sans;
+    @apply bg-background text-foreground box-border font-sans break-words;
     font-family: "Noto Sans JP", sans-serif;
   }
 }
@@ -86,4 +86,18 @@
 
 ::-webkit-scrollbar-thumb:hover {
   @apply bg-gray-400/70;
+}
+
+@layer utilities {
+  .bg-twitter-gradient {
+    background-image: linear-gradient(145deg, #55ACEE, #55ACEE 50%, #1da1f2 60%, #1a7ee9);
+  }
+
+  .bg-github-gradient {
+    background-image: linear-gradient(145deg, rgba(85, 85, 85, 1), rgba(0, 0, 0, 1) 80%);
+  }
+
+  .bg-blog-gradient {
+    background-image: linear-gradient(144deg, #dcebff, #dcebff 50%, #8aa6cc);
+  }
 }
