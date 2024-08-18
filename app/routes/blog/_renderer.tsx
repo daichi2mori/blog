@@ -2,13 +2,12 @@ import { CustomScript } from "app/components/customScript";
 import Footer from "app/components/footer";
 import Header from "app/components/header";
 import { Style } from "hono/css";
-import { jsxRenderer, useRequestContext } from "hono/jsx-renderer";
+import { jsxRenderer } from "hono/jsx-renderer";
 import { Link, Script } from "honox/server";
 import { SiteConfig } from "site.config";
 
 export default jsxRenderer(({ children, title, desc, slug }) => {
-	const c = useRequestContext();
-	const currentUrl = c.req.url;
+	const currentUrl = "https://daichi2mori.com/blog";
 	const pageTitle = title
 		? `${title} - ${SiteConfig.blogName}`
 		: SiteConfig.blogName;
