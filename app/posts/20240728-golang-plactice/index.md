@@ -96,7 +96,7 @@ import (
 )
 
 func main() {
-	Bar()
+	bar.Bar()
 }
 ```
 
