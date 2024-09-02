@@ -1,0 +1,106 @@
+---
+title: 'Taskfileを使ってみました'
+description: 'モノレポ環境でコマンド一つで実行してくれるタスクランナーが欲しかったので試してみました。'
+published: '2024-09-02'
+modified:
+---
+
+## Taskfileとは
+
+Taskfileとはタスクランナー/ビルドツールで、Makefileよりもシンプルで使いやすいことを目指しています。
+
+Go言語で書かれているため、バイナリ1つで他に依存するものがありません。
+
+`Taskfile.yml`というファイルにシンプルなスキーマを使ってタスクを記述するだけです。
+
+<LinkCard url="https://taskfile.dev/" />
+
+
+## インストール
+
+MacとWindowsはそれぞれ以下のコマンドでインストールできます。
+
+- Mac
+
+```bash
+brew install go-task/tap/go-task
+```
+
+- Windows
+
+```bash
+winget install Task.Task
+```
+
+Go言語の環境があれば以下でも可能です。
+
+```bash
+go install github.com/go-task/task/v3/cmd/task@latest
+```
+
+
+## 使い方
+
+まずは`Taskfile.yml`を作成し、以下のコードを記述してください。
+
+```yml title="Taskfile.yml"
+version: '3'
+
+tasks:
+  # タスク名
+  hello:
+    # 実行するコマンド
+    cmds:
+      - echo 'Hello World from Task!'
+    #出力結果のみターミナルに表示
+    silent: true
+```
+
+その後ファイルと同じ階層で以下のコマンドを実行します。
+
+```bash
+task hello
+```
+
+するとターミナルに以下が表示されるはずです。
+
+```bash
+Hello World from Task!
+```
+
+
+## モノレポ環境で実行
+
+今回は React と Golang のモノレポ環境で使うコマンドを考えます。
+
+```yml title="Taskfile.yml"
+version: "3"
+
+silent: true
+
+tasks:
+  dev:
+    desc: Start dev server
+    deps:
+      - task: dev:backend
+      - task: dev:frontend
+
+  dev:backend:
+    desc: Start backend dev server
+    dir: ./backend
+    cmd: air
+
+  dev:frontend:
+    desc: Start frontend dev server
+    dir: ./frontend
+    deps:
+      - frontend:install-deps
+    cmd: bun run dev
+```
+
+上記のコードを記載後`task dev`コマンドを実行するとフロントエンドとバックエンドが起動します。
+
+
+## 参考
+
+<LinkCard url="https://zenn.dev/remew/articles/introduce-taskfile" />
