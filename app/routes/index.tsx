@@ -1,14 +1,11 @@
-import { getPosts } from "app/lib/posts";
 import { createRoute } from "honox/factory";
 
 export default createRoute((c) => {
-	const postCount = getPosts();
-
 	return c.render(
 		<div class={"grid grid-cols-2 gap-7 mt-6 md:mt-12 px-6"}>
 			{/* Profile */}
 			<div
-				class={"flex flex-col items-center p-6 bg-white rounded-3xl col-span-2"}
+				class={"flex flex-col items-center p-6 bg-card rounded-3xl col-span-2"}
 			>
 				<div>
 					<img
@@ -18,7 +15,11 @@ export default createRoute((c) => {
 					/>
 					<div class={"mt-4 md:mt-6 ml-2"}>
 						<h2 class={"text-2xl md:text-3xl font-bold"}>Daichi Mori</h2>
-						<p class={"text-sm md:text-base mt-2 md:mt-3 text-[#565656]"}>
+						<p
+							class={
+								"text-sm md:text-base mt-2 md:mt-3 text-neutral-600 dark:text-neutral-400"
+							}
+						>
 							I'm a front-end developer and can do a little back-end as well.
 						</p>
 						<a
