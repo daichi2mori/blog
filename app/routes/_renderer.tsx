@@ -41,9 +41,13 @@ export default jsxRenderer(({ children, title, desc, slug }) => {
 					href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100..900&display=swap"
 					rel="stylesheet"
 				/>
-				<CustomScript src="/app/theme.ts" />
+				<CustomScript src="/app/theme.ts" nonce={c.get("secureHeadersNonce")} />
 				<Link href="/app/styles/style.css" rel="stylesheet" />
-				<Script src="/app/client.ts" async />
+				<Script
+					src="/app/client.ts"
+					async
+					nonce={c.get("secureHeadersNonce")}
+				/>
 				<Style />
 			</head>
 			<body>
