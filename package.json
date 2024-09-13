@@ -14,7 +14,7 @@
     "@mdx-js/rollup": "^3.0.1",
     "@resvg/resvg-js": "^2.6.2",
     "budoux": "^0.6.2",
-    "hono": "^4.4.3",
+    "hono": "^4.6.1",
     "honox": "^0.1.23",
     "jsdom": "^24.1.0",
     "rehype-external-links": "^3.0.0",
