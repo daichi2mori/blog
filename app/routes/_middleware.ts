@@ -3,9 +3,7 @@ import { createRoute } from "honox/factory";
 
 export default createRoute(
 	secureHeaders({
-		strictTransportSecurity: import.meta.env.PROD
-			? "max-age=63072000; includeSubDomains; preload"
-			: undefined,
+		strictTransportSecurity: "max-age=63072000; includeSubDomains; preload",
 		contentSecurityPolicy: import.meta.env.PROD
 			? {
 					scriptSrc: [NONCE],
