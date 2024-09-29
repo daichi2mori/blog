@@ -13,7 +13,7 @@ export const CustomHead = ({
 	slug: string | undefined;
 }) => {
 	const c = useRequestContext();
-	const currentUrl = c.req.url;
+	const currentUrl = "https://daichi2mori.com";
 	const pageTitle = title
 		? `${title} - ${SiteConfig.blogName}`
 		: SiteConfig.blogName;
