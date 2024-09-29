@@ -24,7 +24,7 @@ export default createRoute((c) => {
 						</p>
 						<a
 							href="/about"
-							class={"mt-2 flex items-center w-fit hover:text-primary group"}
+							class={"hidden mt-2 items-center w-fit hover:text-primary group"}
 						>
 							About me
 							<svg
