@@ -1,6 +1,6 @@
 import type { Frontmatter, MDX } from "../types/index";
 
-const posts = import.meta.glob<MDX>("../posts/**/*.{md,mdx}", {
+const posts = import.meta.glob<MDX>("../../posts/**/*.{md,mdx}", {
 	eager: true,
 });
 

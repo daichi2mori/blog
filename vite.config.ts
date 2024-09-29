@@ -64,12 +64,12 @@ export default defineConfig(({ mode }) => {
 					{
 						src: [
 							"./app/*.png",
-							"./app/posts/**/*.png",
-							"./app/posts/**/*.jpg",
-							"./app/posts/**/*.jpeg",
-							"./app/posts/**/*.webp",
-							"./app/posts/**/*.avif",
-							"./app/posts/**/*.gif",
+							"./posts/**/*.png",
+							"./posts/**/*.jpg",
+							"./posts/**/*.jpeg",
+							"./posts/**/*.webp",
+							"./posts/**/*.avif",
+							"./posts/**/*.gif",
 						],
 						dest: "static",
 						rename: (
