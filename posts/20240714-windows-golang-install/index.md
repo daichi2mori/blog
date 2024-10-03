@@ -1,7 +1,8 @@
 ---
 title: 'WindowsにGo言語をインストール'
 description: 'Go言語をWindowsにインストールする方法です。'
-published: '2024-07-14'
+published: true
+published_at: '2024-07-14'
 modified:
 ---
 

@@ -1,7 +1,8 @@
 ---
 title: 'UbuntuでGitHubにSSH接続'
 description: '新しくUbuntu環境を入手したので、GitHubにSSHで接続する流れを書きました。'
-published: '2024-07-21'
+published: true
+published_at: '2024-07-21'
 modified:
 ---
 

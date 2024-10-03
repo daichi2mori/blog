@@ -1,7 +1,8 @@
 ---
 title: 'WindowsにSQLite3をインストールする方法'
 description: 'Go言語の学習にSQLite3を使おうと思ったので、インストールの流れを書きました。'
-published: '2024-07-29'
+published: true
+published_at: '2024-07-29'
 modified:
 ---
 

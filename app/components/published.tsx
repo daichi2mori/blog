@@ -1,7 +1,7 @@
 const Publish = ({
-	published,
+	published_at,
 	modified,
-}: { published?: string; modified?: string }) => {
+}: { published_at?: string; modified?: string }) => {
 	return (
 		<div class={"flex items-center gap-4"}>
 			<div class={"flex items-center gap-1.5"}>
@@ -31,7 +31,7 @@ const Publish = ({
 						"text-xs md:text-sm font-medium text-gray-400 dark:text-neutral-400"
 					}
 				>
-					{published}
+					{published_at}
 				</span>
 			</div>
 			{modified && (

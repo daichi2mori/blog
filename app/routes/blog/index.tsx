@@ -26,7 +26,10 @@ export default createRoute((c) => {
 								<span className="absolute inset-0 md:hidden" />
 							</a>
 							<p class={"text-sm md:text-base"}>{post.description}</p>
-							<Publish published={post.published} modified={post.modified} />
+							<Publish
+								published_at={post.published_at}
+								modified={post.modified}
+							/>
 						</div>
 
 						<a

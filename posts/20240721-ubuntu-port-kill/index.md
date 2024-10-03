@@ -1,7 +1,8 @@
 ---
 title: 'UbuntuでPortの切断方法'
 description: 'アプリを終了したのにPortが使われていたので切断方法を調べました。'
-published: '2024-07-21'
+published: true
+published_at: '2024-07-21'
 modified:
 ---
 

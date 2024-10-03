@@ -15,8 +15,8 @@ const sortByDateDesc = ():
 	  ) => number)
 	| undefined => {
 	return ([_aid, aPost], [_bid, bPost]) => {
-		const aDate = dateToNumber(aPost.frontmatter.published);
-		const bDate = dateToNumber(bPost.frontmatter.published);
+		const aDate = dateToNumber(aPost.frontmatter.published_at);
+		const bDate = dateToNumber(bPost.frontmatter.published_at);
 		return bDate - aDate;
 	};
 };
@@ -32,11 +32,12 @@ const extractFilenameFromPath = (path: string) => {
 export const getPosts = () => {
 	const postsData = Object.entries(posts)
 		.sort(sortByDateDesc())
+		.filter(([_, post]) => post.frontmatter.published)
 		.map(([path, post]) => ({
 			slug: extractFilenameFromPath(path),
 			title: post.frontmatter.title,
 			description: post.frontmatter.description,
-			published: post.frontmatter.published,
+			published_at: post.frontmatter.published_at,
 			modified: post.frontmatter.modified,
 			Component: post.default,
 		}));

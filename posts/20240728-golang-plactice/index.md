@@ -1,7 +1,8 @@
 ---
 title: 'Go言語基礎'
 description: 'Go言語ファイルの実行方法、ファイル分割、パッケージ、テスト、ビルドを学習しました。'
-published: '2024-07-28'
+published: true
+published_at: '2024-07-28'
 modified:
 ---
 

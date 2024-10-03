@@ -35,7 +35,7 @@ export default createRoute(
 						{post?.title}
 					</h1>
 				</div>
-				<Publish published={post?.published} modified={post?.modified} />
+				<Publish published_at={post?.published_at} modified={post?.modified} />
 				<div class={"markdown"}>{post?.Component({})}</div>
 			</article>,
 			{
