@@ -24,7 +24,7 @@ export default createRoute((c) => {
 						</p>
 						<a
 							href="/about"
-							class={"hidden mt-2 items-center w-fit hover:text-primary group"}
+							class={"mt-2 flex items-center w-fit hover:text-primary group"}
 						>
 							About me
 							<svg
@@ -82,7 +82,7 @@ export default createRoute((c) => {
 				target="_blank"
 				rel="noreferrer"
 				class={
-					"p-6 bg-twitter-gradient rounded-3xl aspect-square flex items-center justify-center transform hover:scale-105 transition duration-200 ease-in-out"
+					"p-6 bg-twitter-gradient rounded-3xl aspect-square grid place-items-center transform hover:scale-105 transition duration-200 ease-in-out"
 				}
 			>
 				<svg
@@ -100,7 +100,7 @@ export default createRoute((c) => {
 				target="_blank"
 				rel="noreferrer"
 				class={
-					"p-6 rounded-3xl aspect-square bg-github-gradient flex items-center justify-center transform hover:scale-105 transition duration-200 ease-in-out"
+					"p-6 rounded-3xl aspect-square bg-github-gradient grid place-items-center transform hover:scale-105 transition duration-200 ease-in-out"
 				}
 			>
 				<svg

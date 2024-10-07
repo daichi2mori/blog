@@ -38,18 +38,17 @@ if (isCancel(extension)) {
 }
 
 const dirname = `${today.replaceAll("-", "")}-${String(slug)}`;
-const createFilePath = `./posts/${dirname}/index.${extension}`;
+const createFilePath = `./app/posts/${dirname}/index.${extension}`;
 const frontmatter = `---
 title:
 description:
-published: ${false}
-published_at: '${today}'
+published: '${today}'
 modified:
 ---
 `;
 
-await $`mkdir ./posts/${dirname}`;
+await $`mkdir ./app/posts/${dirname}`;
 await $`touch ${createFilePath}`;
 await write(createFilePath, frontmatter);
 
-outro(`./posts/${dirname}/index.md is created`);
+outro(`./app/posts/${dirname}/index.md is created`);

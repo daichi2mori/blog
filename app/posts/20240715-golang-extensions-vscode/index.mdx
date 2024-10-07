@@ -1,0 +1,55 @@
+---
+title: 'VSCodeにGo言語の拡張機能を追加する'
+description: 'VSCodeにGo言語の拡張機能を追加することによってIntelliSenseやコードナビゲーション、デバッグ機能が使えます。'
+published: '2024-07-15'
+modified: '2024-07-16'
+---
+
+## 参考サイト
+
+Go言語のインストール方法はこちら（Windows環境の場合）
+<LinkCard url="https://daichi2mori.com/blog/20240714-windows-golang-install" />
+
+VSCodeの拡張機能はこちら
+<LinkCard url="https://learn.microsoft.com/ja-jp/azure/developer/go/configure-visual-studio-code" />
+
+
+## 拡張機能のインストール
+
+VSCodeの拡張機能アイコンをクリックして`golang.go`と検索します。
+Goと書かれた拡張機能をクリックします。
+
+![拡張機能の検索](/static/search-golang-extensions.avif)
+
+以下のようなタブが開きますので、インストールボタンをクリックします。
+
+![拡張機能のインストール](/static/golang-extensions-install.avif)
+
+インストールが完了後はVSCodeを再起動する。
+
+
+## 拡張機能の更新
+
+コマンドパレット（Ctrl + Shift + P）を開き`Go: Install/Update tools`を検索して実行する。
+
+ツール一覧が表示されるので、すべてを選択して「OK」をクリックします。
+
+![Go拡張機能のアップデート](/static/golang-extension-update.avif)
+
+すべてのアップデートが完了すると以下のように表示されます。
+
+![Go拡張機能のアップデート完了](/static/golang-extensions-update-completed.avif)
+
+
+## VSCodeのフォーマット設定
+
+Go言語の一般的なタブサイズはスペース4つ分みたいです。またファイル保存時に自動でフォーマットしてくれるように設定してます。
+
+```json
+"[go]": {
+  "editor.tabSize": 4,
+  "editor.insertSpaces": true,
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "golang.go"
+},
+```

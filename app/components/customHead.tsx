@@ -18,7 +18,7 @@ export const CustomHead = ({
 		? `${title} - ${SiteConfig.blogName}`
 		: SiteConfig.blogName;
 	const description = desc ?? SiteConfig.description;
-	const ogpPath = slug ? `ogps/${slug}.png` : "ogp.png";
+	const ogpPath = slug ? `ogps/${slug}.png` : "/ogp.png";
 
 	return (
 		<>

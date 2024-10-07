@@ -1,0 +1,178 @@
+---
+title: 'Vite + React環境でUnoCSSの使い方'
+description: "TailwindCSSより軽量だと聞いたので試しに使ってみました。"
+published: '2024-08-18'
+modified:
+---
+
+以下の記事でUnoCSSが紹介されていたので、気になって使ってみました。
+
+<LinkCard url="https://zenn.dev/comm_vue_nuxt/articles/what_is_unocss" />
+
+
+## Viteのセットアップ
+
+この記事ではUnoCSSをメインで記述しますので、セットアップは以下の公式サイトを参考にしてください。
+
+<LinkCard url="https://vitejs.dev/guide/" />
+
+
+## UnoCSSのセットアップ
+
+公式サイトはこちら
+
+<LinkCard url="https://unocss.dev/integrations/vite" />
+
+以下のコマンドでUnoCSSをインストールします。
+
+```bash
+bun add -D unocss
+```
+
+次に`vite.config.ts`に追加します。
+
+```ts title="vite.config.ts"
+import { defineConfig } from "vite";
+import react from "@vitejs/plugin-react-swc";
+import UnoCSS from "unocss/vite";
+
+export default defineConfig({
+  plugins: [react(), UnoCSS()],
+});
+```
+
+UnoCSSの設定ファイル`uno.config.ts`を作成します。
+
+TailwindCSSを使う場合は、プリセットが先ほどインストールしたモジュールに入っています。
+
+```ts title="uno.config.ts"
+import { defineConfig, presetWind } from "unocss";
+
+export default defineConfig({
+	presets: [presetWind()],
+});
+```
+
+最後に`main.tsx`にUnoCSSをimportします。
+
+TailwindCSS用のリセットCSSもimportします。
+
+```tsx title="main.tsx"
+import { StrictMode } from "react";
+import { createRoot } from "react-dom/client";
+import App from "./App.tsx";
+import "@unocss/reset/tailwind.css";
+import "virtual:uno.css";
+
+createRoot(document.getElementById("root")!).render(
+  <StrictMode>
+    <App />
+  </StrictMode>
+);
+
+```
+
+これでTailwindCSS記法で書けるようになりました。
+
+```tsx title="appendTrailingSlash.tsx"
+function App() {
+  return (
+    <>
+      <p className="text-red">UnoCSS</p>
+    </>
+  );
+}
+
+export default App;
+```
+
+
+## Attributify
+
+<LinkCard url="https://unocss.dev/presets/attributify" />
+
+Attributify機能は、TailwindCSSを使っていてclassが長くなり、読みにくいときに便利です。
+
+例えば以下のコードを
+
+```tsx
+<button class="bg-blue-400 hover:bg-blue-500 text-sm text-white font-mono font-light py-2 px-4 rounded border-2 border-blue-200 dark:bg-blue-500 dark:hover:bg-blue-600">
+  Button
+</button>
+```
+
+このように項目毎に属性を分けることができます。
+
+```tsx
+<button
+  bg="blue-400 hover:blue-500 dark:blue-500 dark:hover:blue-600"
+  text="sm white"
+  font="mono light"
+  p="y-2 x-4"
+  border="2 rounded blue-200"
+>
+  Button
+</button>
+```
+
+導入するにはまず、`uno.config.ts`に`presetAttributify`を追加します。
+
+```ts title="uno.config.ts"
+import { defineConfig, presetWind, presetAttributify } from "unocss";
+
+export default defineConfig({
+  presets: [presetWind(), presetAttributify()],
+});
+```
+
+次に`vite.config.ts`に記述している、`UnoCSS()`と`react()`の順番が決まっており以下のように設定します。
+
+```ts title="vite.config.ts"
+import { defineConfig } from "vite";
+import react from "@vitejs/plugin-react-swc";
+import UnoCSS from "unocss/vite";
+
+export default defineConfig({
+  plugins: [UnoCSS(), react()],
+});
+```
+
+またこのままだと型に警告が発生するため、`vite-env.d.ts`に型情報を追加します。
+
+```ts title="vite-env.d.ts"
+/// <reference types="vite/client" />
+import type { AttributifyAttributes } from "@unocss/preset-attributify";
+
+declare module "react" {
+  // eslint-disable-next-line @typescript-eslint/no-empty-object-type, @typescript-eslint/no-unused-vars
+  interface HTMLAttributes<T> extends AttributifyAttributes {}
+}
+```
+
+最後にビルドスクリプトから`tsc`を削除します。
+
+```json title="package.json"
+  "scripts": {
+    "build": "vite build",
+  },
+```
+
+これで属性化が完了です。
+
+
+## 拡張機能
+
+VS Codeを使っていたらUnoCSSの拡張機能が提供されていますので、インストールすると開発体験が良くなります。
+
+<LinkCard url="https://marketplace.visualstudio.com/items?itemName=antfu.unocss" />
+
+
+## おわり
+
+今回設定した以外にも、Pure CSSによるアイコンやウェブフォントの設定など機能がたくさんあります。
+
+<LinkCard url="https://unocss.dev/presets/icons" />
+
+紹介した機能のコードは以下のGitHubに置いてます。
+
+<LinkCard url="https://github.com/daichi2mori/vite-unocss-test" />

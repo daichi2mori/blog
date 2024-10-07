@@ -1,6 +1,6 @@
 import type { Frontmatter, MDX } from "../types/index";
 
-const posts = import.meta.glob<MDX>("../../posts/**/*.{md,mdx}", {
+const posts = import.meta.glob<MDX>("../posts/**/*.{md,mdx}", {
 	eager: true,
 });
 
@@ -15,8 +15,8 @@ const sortByDateDesc = ():
 	  ) => number)
 	| undefined => {
 	return ([_aid, aPost], [_bid, bPost]) => {
-		const aDate = dateToNumber(aPost.frontmatter.published_at);
-		const bDate = dateToNumber(bPost.frontmatter.published_at);
+		const aDate = dateToNumber(aPost.frontmatter.published);
+		const bDate = dateToNumber(bPost.frontmatter.published);
 		return bDate - aDate;
 	};
 };
@@ -32,12 +32,11 @@ const extractFilenameFromPath = (path: string) => {
 export const getPosts = () => {
 	const postsData = Object.entries(posts)
 		.sort(sortByDateDesc())
-		.filter(([_, post]) => post.frontmatter.published)
 		.map(([path, post]) => ({
 			slug: extractFilenameFromPath(path),
 			title: post.frontmatter.title,
 			description: post.frontmatter.description,
-			published_at: post.frontmatter.published_at,
+			published: post.frontmatter.published,
 			modified: post.frontmatter.modified,
 			Component: post.default,
 		}));

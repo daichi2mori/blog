@@ -1,0 +1,169 @@
+---
+title: 'Ubuntuでbashからzshに変更して見た目もかっこよくする'
+description: 'zshはカスタマイズがいろいろできるみたいなので、新しくUbuntu環境を手にした機会にためしてみました。'
+published: '2024-07-22'
+modified:
+---
+
+1. zshのインストール
+
+```bash
+sudo apt update
+sudo apt install zsh
+```
+
+
+2. zshの確認
+
+```bash
+zsh --version
+```
+
+
+3. デフォルトシェルをzshに変更
+
+```bash
+chsh -s $(which zsh)
+```
+
+コマンド実行後は再ログインか再起動が必要です。
+
+
+4. Rust環境構築
+
+> [!NOTE]
+> Rust環境は構築しなくても`curl`などを使うことでプラグインをインストールできますが、私はインストールをすべて`cargo`に揃えたかったので構築しました。`cargo`を使わずに設定したい場合は公式サイトを参照ください。
+
+見た目の変更などにrustのパッケージを使用するので、コンパイルに必要なパッケージをインストールします。
+`build-essential`にいろいろ入っているみたいですが、それだけだとエラーになったので追加でインストールします。
+
+```zsh
+sudo apt install build-essential
+sudo apt install pkg-config
+sudo apt install libssl-dev
+sudo apt install cmake
+```
+
+以下のコマンドを実行すると選択肢が出てきますが、そのままEnterでOKです。
+
+```zsh
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+```
+
+インストールが完了したらターミナルを再起動します。
+
+バージョン表示してインストールできているか確認します。
+
+```zsh
+rustup -V
+cargo -V
+```
+
+5. Starshipインストール
+
+**Starship**とはシェル用のプロンプト？で簡単に見た目のカスタマイズができます。
+
+公式サイト
+[https://starship.rs/ja-JP/](https://starship.rs/ja-JP/)
+
+```zsh
+cargo install starship --locked
+```
+
+ターミナルに反映させるために`.zshrc`の末尾に以下を追加
+
+```zsh title=".zshrc"
+eval "$(starship init zsh)"
+```
+
+starshipの設定ファイルを作成します
+
+```zsh
+starship config
+```
+
+上記コマンドで`vi`モードになるので、設定後は`ZZ`で変更して保存できます。
+
+私は以下のように設定しました。
+その他の設定項目は公式サイトをご覧ください。
+
+[https://starship.rs/ja-JP/config/](https://starship.rs/ja-JP/config/)
+
+```toml title="~/.config/starship.toml"
+# エディターの補完を設定スキーマに合わせて取得
+"$schema" = 'https://starship.rs/config-schema.json'
+
+add_newline = true
+
+[directory]
+format = "[$path]($style) "
+truncation_length = 8
+truncation_symbol = "..."
+truncate_to_repo = false
+
+[git_branch]
+format = "on [$symbol$branch]($style) "
+
+[bun]
+format = "via [$symbol$version]($style) "
+
+[nodejs]
+format = "via [$symbol$version]($style) "
+detect_extensions = ["js", "mjs", "cjs", "ts", "mts", "cts"]
+detect_files = ["package.json", ".node-version", "!bunfig.toml", "!bun.lockb"]
+detect_folders = ["node_modules"]
+```
+
+
+6. Sheldonインストール
+
+**Sheldon**はプラグインマネージャーで、Rust製で高速に動作します。
+
+```zsh
+cargo install sheldon
+```
+
+以下コマンドで設定ファイルを作成します。
+`$XDG_CONFIG_HOME`を変更していなかったら、`~/.config/sheldon/plugins.toml`に作成されます。
+
+質問を聞かれますがyesでOKです。
+
+```zsh
+sheldon init --shell zsh
+```
+
+通常の設定では`.zshrc`ファイルに`eval "$(sheldon source)"`を記述しますが、それだと起動のたびに呼び出されるため時間がかかってしまいます。
+
+そのためキャッシュすることによって起動を高速化しています。
+
+```zsh title=".zshrc"
+# ファイル名を変数に入れる
+cache_dir=${XDG_CACHE_HOME:-$HOME/.cache}
+sheldon_cache="$cache_dir/sheldon.zsh"
+sheldon_toml="$HOME/.config/sheldon/plugins.toml"
+# キャッシュがない、またはキャッシュが古い場合にキャッシュを作成
+if [[ ! -r "$sheldon_cache" || "$sheldon_toml" -nt "$sheldon_cache" ]]; then
+  mkdir -p $cache_dir
+  sheldon source > $sheldon_cache
+fi
+source "$sheldon_cache"
+# 使い終わった変数を削除
+unset cache_dir sheldon_cache sheldon_toml
+```
+
+`sheldon`で取り合えず2つプラグインを入れました。
+
+```zsh title="~/.config/sheldon/plugins.toml"
+[plugins.zsh-syntax-highlighting]
+github = "zsh-users/zsh-syntax-highlighting"
+
+[plugins.zsh-autosuggestions]
+github = "zsh-users/zsh-autosuggestions"
+```
+
+
+## 参考サイト
+<LinkCard url="https://qiita.com/yoshi_yast/items/5eaa917e567b3add55ac" />
+<LinkCard url="https://zenn.dev/ryuu/articles/customize-your-terminal" />
+<LinkCard url="https://qiita.com/neruneruna7/items/1569350742c686ceefbe" />
+<LinkCard url="https://zenn.dev/fuzmare/articles/zsh-plugin-manager-cache" />

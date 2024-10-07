@@ -4,8 +4,7 @@ import type { MDXProps } from "mdx/types";
 export type Frontmatter = {
 	title: string;
 	description: string;
-	published: boolean;
-	published_at: string;
+	published: string;
 	modified?: string;
 	category: string;
 	tags: string[];

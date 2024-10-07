@@ -23,7 +23,7 @@ export default createRoute(
 		return c.render(
 			<article
 				class={
-					"bg-card rounded-[16px] px-4 md:px-9 pt-6 pb-4 flex flex-col gap-4"
+					"bg-card rounded-[16px] px-6 md:px-9 pt-6 pb-4 flex flex-col gap-4"
 				}
 			>
 				<div class={"relative"}>
@@ -35,7 +35,7 @@ export default createRoute(
 						{post?.title}
 					</h1>
 				</div>
-				<Publish published_at={post?.published_at} modified={post?.modified} />
+				<Publish published={post?.published} modified={post?.modified} />
 				<div class={"markdown"}>{post?.Component({})}</div>
 			</article>,
 			{
