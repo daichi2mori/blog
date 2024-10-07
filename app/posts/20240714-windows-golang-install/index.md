@@ -1,27 +1,26 @@
 ---
-title: 'WindowsにGo言語をインストール'
-description: 'Go言語をWindowsにインストールする方法です。'
-published: '2024-07-14'
+title: "WindowsにGo言語をインストール"
+description: "Go言語をWindowsにインストールする方法です。"
+published_at: "2024-07-14"
 modified:
+published: true
 ---
 
 ## はじめに
 
-インストール先のパスに空白が入っていると予期せぬ動作が発生する可能性があるみたいなので、Windows標準のインストール先「C:\program Files」ではなく、新しく「lang」ディレクトリを作成しています。
-
+インストール先のパスに空白が入っていると予期せぬ動作が発生する可能性があるみたいなので、Windows 標準のインストール先「C:\program Files」ではなく、新しく「lang」ディレクトリを作成しています。
 
 ## インストール
 
-Windows標準のパッケージマネージャーの`winget`を使用します。
+Windows 標準のパッケージマネージャーの`winget`を使用します。
 
-Go言語は`winget`の`--location`オプションを無視するため、`--override`オプションと`INSTALLDIR`変数を使用します。
+Go 言語は`winget`の`--location`オプションを無視するため、`--override`オプションと`INSTALLDIR`変数を使用します。
 
 ```bash
 winget install GoLang.Go --override "INSTALLDIR=C:\\lang\\go"
 ```
 
-コマンドを実行するとGo言語のインストーラーが起動するので、すべてYESを押して最後にInstallをクリックします。
-
+コマンドを実行すると Go 言語のインストーラーが起動するので、すべて YES を押して最後に Install をクリックします。
 
 ## 環境変数の確認
 
@@ -53,8 +52,7 @@ winget install GoLang.Go --override "INSTALLDIR=C:\\lang\\go"
 
 ![編集ボタンをクリック](/static/confirm-sys-go-path-env.avif)
 
-
-## goコマンドの実行
+## go コマンドの実行
 
 パスが正常に通っているか、バージョン確認するコマンドを実行して確認します。
 

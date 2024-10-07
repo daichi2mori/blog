@@ -1,26 +1,25 @@
 ---
-title: 'Ubuntuでbashからzshに変更して見た目もかっこよくする'
-description: 'zshはカスタマイズがいろいろできるみたいなので、新しくUbuntu環境を手にした機会にためしてみました。'
-published: '2024-07-22'
+title: "Ubuntuでbashからzshに変更して見た目もかっこよくする"
+description: "zshはカスタマイズがいろいろできるみたいなので、新しくUbuntu環境を手にした機会にためしてみました。"
+published_at: "2024-07-22"
 modified:
+published: true
 ---
 
-1. zshのインストール
+1. zsh のインストール
 
 ```bash
 sudo apt update
 sudo apt install zsh
 ```
 
-
-2. zshの確認
+2. zsh の確認
 
 ```bash
 zsh --version
 ```
 
-
-3. デフォルトシェルをzshに変更
+3. デフォルトシェルを zsh に変更
 
 ```bash
 chsh -s $(which zsh)
@@ -28,13 +27,12 @@ chsh -s $(which zsh)
 
 コマンド実行後は再ログインか再起動が必要です。
 
-
-4. Rust環境構築
+4. Rust 環境構築
 
 > [!NOTE]
-> Rust環境は構築しなくても`curl`などを使うことでプラグインをインストールできますが、私はインストールをすべて`cargo`に揃えたかったので構築しました。`cargo`を使わずに設定したい場合は公式サイトを参照ください。
+> Rust 環境は構築しなくても`curl`などを使うことでプラグインをインストールできますが、私はインストールをすべて`cargo`に揃えたかったので構築しました。`cargo`を使わずに設定したい場合は公式サイトを参照ください。
 
-見た目の変更などにrustのパッケージを使用するので、コンパイルに必要なパッケージをインストールします。
+見た目の変更などに rust のパッケージを使用するので、コンパイルに必要なパッケージをインストールします。
 `build-essential`にいろいろ入っているみたいですが、それだけだとエラーになったので追加でインストールします。
 
 ```zsh
@@ -44,7 +42,7 @@ sudo apt install libssl-dev
 sudo apt install cmake
 ```
 
-以下のコマンドを実行すると選択肢が出てきますが、そのままEnterでOKです。
+以下のコマンドを実行すると選択肢が出てきますが、そのまま Enter で OK です。
 
 ```zsh
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
@@ -59,7 +57,7 @@ rustup -V
 cargo -V
 ```
 
-5. Starshipインストール
+5. Starship インストール
 
 **Starship**とはシェル用のプロンプト？で簡単に見た目のカスタマイズができます。
 
@@ -76,7 +74,7 @@ cargo install starship --locked
 eval "$(starship init zsh)"
 ```
 
-starshipの設定ファイルを作成します
+starship の設定ファイルを作成します
 
 ```zsh
 starship config
@@ -114,10 +112,9 @@ detect_files = ["package.json", ".node-version", "!bunfig.toml", "!bun.lockb"]
 detect_folders = ["node_modules"]
 ```
 
+6. Sheldon インストール
 
-6. Sheldonインストール
-
-**Sheldon**はプラグインマネージャーで、Rust製で高速に動作します。
+**Sheldon**はプラグインマネージャーで、Rust 製で高速に動作します。
 
 ```zsh
 cargo install sheldon
@@ -126,7 +123,7 @@ cargo install sheldon
 以下コマンドで設定ファイルを作成します。
 `$XDG_CONFIG_HOME`を変更していなかったら、`~/.config/sheldon/plugins.toml`に作成されます。
 
-質問を聞かれますがyesでOKです。
+質問を聞かれますが yes で OK です。
 
 ```zsh
 sheldon init --shell zsh
@@ -151,7 +148,7 @@ source "$sheldon_cache"
 unset cache_dir sheldon_cache sheldon_toml
 ```
 
-`sheldon`で取り合えず2つプラグインを入れました。
+`sheldon`で取り合えず 2 つプラグインを入れました。
 
 ```zsh title="~/.config/sheldon/plugins.toml"
 [plugins.zsh-syntax-highlighting]
@@ -161,8 +158,8 @@ github = "zsh-users/zsh-syntax-highlighting"
 github = "zsh-users/zsh-autosuggestions"
 ```
 
-
 ## 参考サイト
+
 <LinkCard url="https://qiita.com/yoshi_yast/items/5eaa917e567b3add55ac" />
 <LinkCard url="https://zenn.dev/ryuu/articles/customize-your-terminal" />
 <LinkCard url="https://qiita.com/neruneruna7/items/1569350742c686ceefbe" />

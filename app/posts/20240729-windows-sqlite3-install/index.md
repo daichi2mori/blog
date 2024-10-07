@@ -1,11 +1,12 @@
 ---
-title: 'WindowsにSQLite3をインストールする方法'
-description: 'Go言語の学習にSQLite3を使おうと思ったので、インストールの流れを書きました。'
-published: '2024-07-29'
+title: "WindowsにSQLite3をインストールする方法"
+description: "Go言語の学習にSQLite3を使おうと思ったので、インストールの流れを書きました。"
+published_at: "2024-07-29"
 modified:
+published: true
 ---
 
-## SQLite3のインストール
+## SQLite3 のインストール
 
 今回は`winget`を使用します。
 
@@ -13,7 +14,7 @@ modified:
 winget install --id SQLite.SQLite
 ```
 
-インストール後、sqlite3が
+インストール後、sqlite3 が
 
 ```bash
 sqlite3
@@ -30,26 +31,25 @@ Use ".open FILENAME" to reopen on a persistent database.
 sqlite>
 ```
 
+## GCC のインストール
 
-## GCCのインストール
-
-gccはwingetでインストールできないみたいなので、公式サイトからダウンロードします。
+gcc は winget でインストールできないみたいなので、公式サイトからダウンロードします。
 
 [https://jmeubank.github.io/tdm-gcc/](https://jmeubank.github.io/tdm-gcc/)
 
-画面左側にある`MinGW-w64 based`のEXEファイルをダウンロードします。
+画面左側にある`MinGW-w64 based`の EXE ファイルをダウンロードします。
 
 ![gccのインストール場所](/static/gcc.avif)
 
-ダウンロード後、EXEファイルを起動するとセットアップ画面が開きますので、「Create」をクリックします。
+ダウンロード後、EXE ファイルを起動するとセットアップ画面が開きますので、「Create」をクリックします。
 
 ![gccのセットアップ](/static/gcc-setup.avif)
 
-64bitが選択されていることを確認してから「Next」をクリックします。
+64bit が選択されていることを確認してから「Next」をクリックします。
 
 ![gccのインストールbit](/static/gcc-64bit.avif)
 
-インストール先は特に理由がなければCドライブにインストールするのがいいと思います。
+インストール先は特に理由がなければ C ドライブにインストールするのがいいと思います。
 
 ![gccのインストール先](/static/gcc-install-directory.avif)
 
@@ -57,7 +57,7 @@ gccはwingetでインストールできないみたいなので、公式サイ�
 
 ![gccのインストールするコンポーネント](/static/gcc-install-components.avif)
 
-インストール完了後ターミナルを再起動してから、gccのインストール確認をします。
+インストール完了後ターミナルを再起動してから、gcc のインストール確認をします。
 
 ```bash
 gcc --version
@@ -72,7 +72,6 @@ Copyright (C) 2020 Free Software Foundation, Inc.
 This is free software; see the source for copying conditions.  There is NO
 warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 ```
-
 
 ## その他
 

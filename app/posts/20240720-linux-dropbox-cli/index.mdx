@@ -1,13 +1,14 @@
 ---
-title: 'Linux版Dropboxのコマンドライン一覧'
-description: 'Linux版Dropboxで同期設定の方法を調べていたらCLIで操作できることを知りました。'
-published: '2024-07-20'
+title: "Linux版Dropboxのコマンドライン一覧"
+description: "Linux版Dropboxで同期設定の方法を調べていたらCLIで操作できることを知りました。"
+published_at: "2024-07-20"
 modified:
+published: true
 ---
 
 公式サイト
-<LinkCard url="https://help.dropbox.com/ja-jp/installs/linux-commands#commands" />
 
+<LinkCard url="https://help.dropbox.com/ja-jp/installs/linux-commands#commands" />
 
 ### ログイン時自動起動
 
@@ -18,7 +19,6 @@ dropbox autostart [y/n]
 - y: ログイン時に自動的に開始します
 - n: ログイン時に自動的に開始しません
 
-
 ### 同期設定
 
 現在同期の対象にしていないディレクトリのリストを表示します
@@ -27,18 +27,17 @@ dropbox autostart [y/n]
 dropbox exclude
 ```
 
-除外リストにディレクトリを追加しDropboxを再び同期します
+除外リストにディレクトリを追加し Dropbox を再び同期します
 
 ```bash
 dropbox exclude add [DIRECTORY] [DIRECTORY] …
 ```
 
-除外リストからディレクトリを削除し、Dropboxを再び同期します
+除外リストからディレクトリを削除し、Dropbox を再び同期します
 
 ```bash
 dropbox exclude remove [DIRECTORY] [DIRECTORY] …
 ```
-
 
 ### ファイルステータス
 
@@ -48,9 +47,8 @@ dropbox file status [-l] [-a] [FILE]…
 
 ファイルの現在のステータスを表示します
 
-- -l or --list: Linuxコマンドlsに似た形式で情報を表示します
-- -a or --all:  「.」で始まるエントリを無視しません
-
+- -l or --list: Linux コマンド ls に似た形式で情報を表示します
+- -a or --all: 「.」で始まるエントリを無視しません
 
 ### ヘルプ
 
@@ -61,16 +59,14 @@ dropbox help [command]
 引数がない場合、コマンドのリストと各コマンドの簡単な概要を表示します。
 コマンドがある場合はコマンドの使用方法を表示します。
 
-
-### LAN同期
+### LAN 同期
 
 ```bash
 dropbox lansync [y/n]
 ```
 
-- y: LAN同期を使用します（デフォルト設定）
+- y: LAN 同期を使用します（デフォルト設定）
 - n: LAN 同期を使用しません
-
 
 ### プロキシ
 
@@ -78,12 +74,11 @@ dropbox lansync [y/n]
 dropbox proxy MODE [TYPE] [HOST] [PORT] [USERNAME] [PASSWORD]
 ```
 
-- TYPE: https、socks4、socks5のうちのどれか1つ
+- TYPE: https、socks4、socks5 のうちのどれか 1 つ
 - HOST: プロキシのホスト名
 - PORT: プロキシのポート
 - USERNAME: プロキシのユーザー名（オプション）
 - PASSWORD: プロキシのパスワード（オプション）
-
 
 ### デーモン
 
@@ -105,7 +100,6 @@ dropbox start [-i]
 dropbox stop
 ```
 
-
 ### ステータス
 
 デーモンの現在のステータスを表示します
@@ -114,7 +108,6 @@ dropbox stop
 dropbox status
 ```
 
-
 ### バンド幅
 
 ```bash
@@ -122,4 +115,4 @@ dropbox throttle DOWNLOAD UPLOAD
 ```
 
 - DOWNLOAD: 無制限または手動モードの上限を KB/秒で設定
-- UPLOAD:   無制限、自動または手動で KB/s を設定
+- UPLOAD: 無制限、自動または手動で KB/s を設定

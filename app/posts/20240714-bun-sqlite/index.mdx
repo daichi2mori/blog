@@ -1,21 +1,24 @@
 ---
-title: 'BunのSQLiteドライバーを使ってTodo機能実装'
-description: 'BunがネイティブでSQLiteドライバーをサポートしていたのでTodo機能を実装しながら試してみました。'
-published: '2024-07-14'
+title: "BunのSQLiteドライバーを使ってTodo機能実装"
+description: "BunがネイティブでSQLiteドライバーをサポートしていたのでTodo機能を実装しながら試してみました。"
+published_at: "2024-07-14"
 modified:
+published: true
 ---
 
 ## はじめに
 
 今回書いたコードはこちら
+
 <LinkCard url="https://github.com/daichi2mori/bun-sqlite" />
 
-BunのSQLiteについて説明されているサイトはこちら
+Bun の SQLite について説明されているサイトはこちら
+
 <LinkCard url="https://bun.sh/docs/api/sqlite" />
 
 ## 環境構築
 
-Bunの型情報を反映させるため`@types/bun`をインストールします。
+Bun の型情報を反映させるため`@types/bun`をインストールします。
 
 ```bash
 bun add -D @types/bun
@@ -46,8 +49,8 @@ db.run(`
 export default db;
 ```
 
-`bun:sqlite`から`Database`をimportして`dbインスタンス`を作成します。
-`create`オプションをtrueにすることで`.sqlite`ファイルが存在しないとき作成するように設定できます。
+`bun:sqlite`から`Database`を import して`dbインスタンス`を作成します。
+`create`オプションを true にすることで`.sqlite`ファイルが存在しないとき作成するように設定できます。
 
 ちなみにインメモリーで作成するには以下の三種類の方法があります。
 
@@ -62,8 +65,8 @@ const db = new Database("");
 
 ## サーバー
 
-実は自分ですべてを書いたコードは上記のdb部分のみでして、これ以降のコードはだいたいChatGPTに書いてもらいました。
-私はChatGPTが書いたコードのエラーを解消しただけで、Todo機能を実装してというアバウトな指令でだいたい書いてくれるので便利ですね。
+実は自分ですべてを書いたコードは上記の db 部分のみでして、これ以降のコードはだいたい ChatGPT に書いてもらいました。
+私は ChatGPT が書いたコードのエラーを解消しただけで、Todo 機能を実装してというアバウトな指令でだいたい書いてくれるので便利ですね。
 
 ```ts showLineNumbers title="src/server.ts"
 import { serve } from "bun";
@@ -149,16 +152,16 @@ serve({
 console.log(`Server running on http://localhost:${PORT}`);
 ```
 
-ここではURLのパスによってTodoを作成したり削除したりの制御を行っています。
+ここでは URL のパスによって Todo を作成したり削除したりの制御を行っています。
 
-ルートURLにアクセスしたときに、publicディレクトリ内にあるHTMLファイルを読み取った内容を返します。
+ルート URL にアクセスしたときに、public ディレクトリ内にある HTML ファイルを読み取った内容を返します。
 
 `db.run`メソッドのコードでは、第二引数にある配列が「？」に入ってきます。
-これによってSQLインジェクションを防ぐことができます。
+これによって SQL インジェクションを防ぐことができます。
 
 ## フロント
 
-サーバー側で以下のHTML情報を読み込んでクライアントに返しています。
+サーバー側で以下の HTML 情報を読み込んでクライアントに返しています。
 
 ```html showLineNumbers title="public/index.html"
 <!DOCTYPE html>
@@ -180,7 +183,7 @@ console.log(`Server running on http://localhost:${PORT}`);
 </html>
 ```
 
-以下のJavaScriptではフォームが送信されたときやTodoが操作されたときのイベントを読み取ってサーバーに情報を送っています。
+以下の JavaScript ではフォームが送信されたときや Todo が操作されたときのイベントを読み取ってサーバーに情報を送っています。
 
 ```js showLineNumbers title="src/server.ts"
 document.addEventListener("DOMContentLoaded", () => {
@@ -257,16 +260,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
 ## おまけ
 
-BunのバンドラーにはJavaScriptをスタンドアローンで生成する機能があります。
+Bun のバンドラーには JavaScript をスタンドアローンで生成する機能があります。
 
-今回作成したTodoアプリも以下のコマンドでスタンドアローンとして生成することができます。
+今回作成した Todo アプリも以下のコマンドでスタンドアローンとして生成することができます。
 
 ```bash
 bun build --compile --minify --sourcemap src/server.ts --outfile [app-name]
 ```
 
 対応している環境は以下の画像になります。
-Bun側で自動にそれぞれの環境にあったアプリに変換してくれます。
+Bun 側で自動にそれぞれの環境にあったアプリに変換してくれます。
 `--target`フラグを付けることで指定することもできます。
 
 ![Image](/static/target.avif)

@@ -1,29 +1,28 @@
 ---
-title: 'Vite + React環境でUnoCSSの使い方'
+title: "Vite + React環境でUnoCSSの使い方"
 description: "TailwindCSSより軽量だと聞いたので試しに使ってみました。"
-published: '2024-08-18'
+published_at: "2024-08-18"
 modified:
+published: true
 ---
 
-以下の記事でUnoCSSが紹介されていたので、気になって使ってみました。
+以下の記事で UnoCSS が紹介されていたので、気になって使ってみました。
 
 <LinkCard url="https://zenn.dev/comm_vue_nuxt/articles/what_is_unocss" />
 
+## Vite のセットアップ
 
-## Viteのセットアップ
-
-この記事ではUnoCSSをメインで記述しますので、セットアップは以下の公式サイトを参考にしてください。
+この記事では UnoCSS をメインで記述しますので、セットアップは以下の公式サイトを参考にしてください。
 
 <LinkCard url="https://vitejs.dev/guide/" />
 
-
-## UnoCSSのセットアップ
+## UnoCSS のセットアップ
 
 公式サイトはこちら
 
 <LinkCard url="https://unocss.dev/integrations/vite" />
 
-以下のコマンドでUnoCSSをインストールします。
+以下のコマンドで UnoCSS をインストールします。
 
 ```bash
 bun add -D unocss
@@ -41,21 +40,21 @@ export default defineConfig({
 });
 ```
 
-UnoCSSの設定ファイル`uno.config.ts`を作成します。
+UnoCSS の設定ファイル`uno.config.ts`を作成します。
 
-TailwindCSSを使う場合は、プリセットが先ほどインストールしたモジュールに入っています。
+TailwindCSS を使う場合は、プリセットが先ほどインストールしたモジュールに入っています。
 
 ```ts title="uno.config.ts"
 import { defineConfig, presetWind } from "unocss";
 
 export default defineConfig({
-	presets: [presetWind()],
+  presets: [presetWind()],
 });
 ```
 
-最後に`main.tsx`にUnoCSSをimportします。
+最後に`main.tsx`に UnoCSS を import します。
 
-TailwindCSS用のリセットCSSもimportします。
+TailwindCSS 用のリセット CSS も import します。
 
 ```tsx title="main.tsx"
 import { StrictMode } from "react";
@@ -69,10 +68,9 @@ createRoot(document.getElementById("root")!).render(
     <App />
   </StrictMode>
 );
-
 ```
 
-これでTailwindCSS記法で書けるようになりました。
+これで TailwindCSS 記法で書けるようになりました。
 
 ```tsx title="appendTrailingSlash.tsx"
 function App() {
@@ -86,12 +84,11 @@ function App() {
 export default App;
 ```
 
-
 ## Attributify
 
 <LinkCard url="https://unocss.dev/presets/attributify" />
 
-Attributify機能は、TailwindCSSを使っていてclassが長くなり、読みにくいときに便利です。
+Attributify 機能は、TailwindCSS を使っていて class が長くなり、読みにくいときに便利です。
 
 例えば以下のコードを
 
@@ -159,20 +156,18 @@ declare module "react" {
 
 これで属性化が完了です。
 
-
 ## 拡張機能
 
-VS Codeを使っていたらUnoCSSの拡張機能が提供されていますので、インストールすると開発体験が良くなります。
+VS Code を使っていたら UnoCSS の拡張機能が提供されていますので、インストールすると開発体験が良くなります。
 
 <LinkCard url="https://marketplace.visualstudio.com/items?itemName=antfu.unocss" />
 
-
 ## おわり
 
-今回設定した以外にも、Pure CSSによるアイコンやウェブフォントの設定など機能がたくさんあります。
+今回設定した以外にも、Pure CSS によるアイコンやウェブフォントの設定など機能がたくさんあります。
 
 <LinkCard url="https://unocss.dev/presets/icons" />
 
-紹介した機能のコードは以下のGitHubに置いてます。
+紹介した機能のコードは以下の GitHub に置いてます。
 
 <LinkCard url="https://github.com/daichi2mori/vite-unocss-test" />

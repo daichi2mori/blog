@@ -1,24 +1,24 @@
 ---
-title: 'Taskfileを使ってみました'
-description: 'モノレポ環境でコマンド一つで実行してくれるタスクランナーが欲しかったので試してみました。'
-published: '2024-09-02'
+title: "Taskfileを使ってみました"
+description: "モノレポ環境でコマンド一つで実行してくれるタスクランナーが欲しかったので試してみました。"
+published_at: "2024-09-02"
 modified:
+published: true
 ---
 
-## Taskfileとは
+## Taskfile とは
 
-Taskfileとはタスクランナー/ビルドツールで、Makefileよりもシンプルで使いやすいことを目指しています。
+Taskfile とはタスクランナー/ビルドツールで、Makefile よりもシンプルで使いやすいことを目指しています。
 
-Go言語で書かれているため、バイナリ1つで他に依存するものがありません。
+Go 言語で書かれているため、バイナリ 1 つで他に依存するものがありません。
 
 `Taskfile.yml`というファイルにシンプルなスキーマを使ってタスクを記述するだけです。
 
 <LinkCard url="https://taskfile.dev/" />
 
-
 ## インストール
 
-MacとWindowsはそれぞれ以下のコマンドでインストールできます。
+Mac と Windows はそれぞれ以下のコマンドでインストールできます。
 
 - Mac
 
@@ -32,19 +32,18 @@ brew install go-task/tap/go-task
 winget install Task.Task
 ```
 
-Go言語の環境があれば以下でも可能です。
+Go 言語の環境があれば以下でも可能です。
 
 ```bash
 go install github.com/go-task/task/v3/cmd/task@latest
 ```
-
 
 ## 使い方
 
 まずは`Taskfile.yml`を作成し、以下のコードを記述してください。
 
 ```yml title="Taskfile.yml"
-version: '3'
+version: "3"
 
 tasks:
   # タスク名
@@ -67,7 +66,6 @@ task hello
 ```bash
 Hello World from Task!
 ```
-
 
 ## モノレポ環境で実行
 
@@ -99,7 +97,6 @@ tasks:
 ```
 
 上記のコードを記載後`task dev`コマンドを実行するとフロントエンドとバックエンドが起動します。
-
 
 ## 参考
 
