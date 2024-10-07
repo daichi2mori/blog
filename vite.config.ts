@@ -18,77 +18,71 @@ import tsconfigPaths from "vite-tsconfig-paths";
 const entry = "./app/server.ts";
 
 export default defineConfig(({ mode }) => {
-	if (mode === "client") {
-		return {
-			plugins: [
-				client({
-					input: ["/app/theme.ts", "/app/styles/style.css"],
-				}),
-			],
-		};
-	}
+  if (mode === "client") {
+    return {
+      plugins: [
+        client({
+          input: ["/app/theme.ts", "/app/styles/style.css"],
+        }),
+      ],
+    };
+  }
 
-	return {
-		build: {
-			emptyOutDir: false,
-		},
+  return {
+    build: {
+      emptyOutDir: false,
+    },
 
-		plugins: [
-			tsconfigPaths(),
-			ssg({ entry }),
-			honox(),
-			mdx({
-				jsxImportSource: "hono/jsx",
-				providerImportSource: "./app/components/mdx",
-				remarkPlugins: [
-					remarkFrontmatter,
-					remarkMdxFrontmatter,
-					remarkAlert,
-					remarkRehype,
-					remarkParse,
-				],
-				rehypePlugins: [
-					[
-						rehypeExternalLinks,
-						{
-							rel: ["noreferrer"],
-							target: ["_blank"],
-						},
-					],
-					rehypeStringify,
-					[rehypePrettyCode, { theme: "dark-plus", keepBackground: false }],
-				],
-			}),
-			viteStaticCopy({
-				targets: [
-					{
-						src: [
-							"./app/*.png",
-							"./app/posts/**/*.png",
-							"./app/posts/**/*.jpg",
-							"./app/posts/**/*.jpeg",
-							"./app/posts/**/*.webp",
-							"./app/posts/**/*.avif",
-							"./app/posts/**/*.gif",
-						],
-						dest: "static",
-						rename: (
-							fileName: string,
-							fileExtension: string,
-							_fullPath: string,
-						) => {
-							return normalizePath(
-								path.relative(__dirname, `${fileName}.${fileExtension}`),
-							);
-						},
-						overwrite: false,
-					},
-				],
-			}),
-		],
+    plugins: [
+      tsconfigPaths(),
+      ssg({ entry }),
+      honox(),
+      mdx({
+        jsxImportSource: "hono/jsx",
+        providerImportSource: "./app/components/mdx",
+        remarkPlugins: [
+          remarkFrontmatter,
+          remarkMdxFrontmatter,
+          remarkAlert,
+          remarkRehype,
+          remarkParse,
+        ],
+        rehypePlugins: [
+          [
+            rehypeExternalLinks,
+            {
+              rel: ["noreferrer"],
+              target: ["_blank"],
+            },
+          ],
+          rehypeStringify,
+          [rehypePrettyCode, { theme: "dark-plus", keepBackground: false }],
+        ],
+      }),
+      viteStaticCopy({
+        targets: [
+          {
+            src: [
+              "./app/*.png",
+              "./posts/**/*.png",
+              "./posts/**/*.jpg",
+              "./posts/**/*.jpeg",
+              "./posts/**/*.webp",
+              "./posts/**/*.avif",
+              "./posts/**/*.gif",
+            ],
+            dest: "static",
+            rename: (fileName: string, fileExtension: string, _fullPath: string) => {
+              return normalizePath(path.relative(__dirname, `${fileName}.${fileExtension}`));
+            },
+            overwrite: false,
+          },
+        ],
+      }),
+    ],
 
-		ssr: {
-			external: ["satori", "@resvg/resvg-js", "budoux", "jsdom"],
-		},
-	};
+    ssr: {
+      external: ["satori", "@resvg/resvg-js", "budoux", "jsdom"],
+    },
+  };
 });
