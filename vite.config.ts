@@ -82,7 +82,7 @@ export default defineConfig(({ mode }) => {
     ],
 
     ssr: {
-      external: ["satori", "@resvg/resvg-js", "budoux", "jsdom"],
+      external: ["satori", "@resvg/resvg-js", "budoux", "jsdom", "feed"],
     },
   };
 });
