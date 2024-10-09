@@ -39,8 +39,7 @@ if (isCancel(extension)) {
 
 const dirname = `${today.replaceAll("-", "")}-${String(slug)}`;
 const createFilePath = `./posts/${dirname}/index.${extension}`;
-const frontmatter = `
----
+const frontmatter = `---
 title:
 description:
 published_at: '${today}'
