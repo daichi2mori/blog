@@ -3,6 +3,7 @@ title: "GitHubのアバター画像や公開鍵を取得する方法"
 description: "GitHubで設定しているアイコン画像や公開鍵は隠しURLで公開されています。簡単に取得できますので、その取得方法を記載します。"
 published_at: "2024-06-24"
 published: true
+tags: ["github"]
 ---
 
 ## アバター画像

@@ -6,9 +6,10 @@ import { createRoute } from "honox/factory";
 export default createRoute(
   ssgParams(() => {
     const posts = getPosts();
-    return posts.map((post) => ({
+    const params = posts.map((post) => ({
       slug: post.slug,
     }));
+    return params;
   }),
   (c) => {
     const slug = c.req.param("slug");
@@ -18,7 +19,7 @@ export default createRoute(
 
     const post = getPostBySlug(slug);
     const title = post?.title ?? "";
-    const desc = post?.description;
+    const desc = post?.description ?? "";
 
     return c.render(
       <article class={"bg-card rounded-[16px] px-4 md:px-9 pt-6 pb-4 flex flex-col gap-4"}>

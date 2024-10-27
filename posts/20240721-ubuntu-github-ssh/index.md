@@ -4,6 +4,7 @@ description: "新しくUbuntu環境を入手したので、GitHubにSSHで接続
 published_at: "2024-07-21"
 modified:
 published: true
+tags: ["linux", "ubuntu", "github"]
 ---
 
 1. ユーザー情報の登録

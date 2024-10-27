@@ -1,4 +1,4 @@
-import type { Frontmatter, MDX } from "../types/index";
+import type { Frontmatter, GetPostsByTag, MDX, Tags } from "../types/index";
 
 const posts = import.meta.glob<MDX>("../../posts/**/*.{md,mdx}", {
   eager: true,
@@ -39,6 +39,7 @@ export const getPosts = () => {
       description: post.frontmatter.description,
       published_at: post.frontmatter.published_at,
       modified: post.frontmatter.modified,
+      tags: post.frontmatter.tags,
       Component: post.default,
     }));
 
@@ -49,4 +50,10 @@ export const getPostBySlug = (slug: string) => {
   const posts = getPosts();
   const post = posts.find((post) => post.slug === slug);
   return post;
+};
+
+export const getPostByTag = (tag: Tags): GetPostsByTag[] => {
+  const posts = getPosts();
+  const filteredPosts = posts.filter((post) => post.tags.some((t) => t === tag));
+  return filteredPosts;
 };

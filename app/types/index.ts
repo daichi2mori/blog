@@ -8,7 +8,7 @@ export type Frontmatter = {
   modified?: string;
   published: boolean;
   category: string;
-  tags: string[];
+  tags: Tags[];
 };
 
 export type MDX = {
@@ -22,4 +22,38 @@ export type GoogleFontOptions = {
   weight?: number;
   text?: string;
   display?: string;
+};
+
+export type Head = {
+  title?: string;
+  desc?: string;
+  slug?: string;
+  tag?: Tags;
+};
+
+export const allTags = [
+  { id: "markdown", label: "Markdown" },
+  { id: "windows", label: "Windows" },
+  { id: "github", label: "GitHub" },
+  { id: "bun", label: "Bun" },
+  { id: "sqlite", label: "SQLite" },
+  { id: "golang", label: "Go言語" },
+  { id: "vscode", label: "VSCode" },
+  { id: "linux", label: "Linux" },
+  { id: "ubuntu", label: "Ubuntu" },
+  { id: "react", label: "React" },
+  { id: "vite", label: "Vite" },
+  { id: "css", label: "CSS" },
+] as const;
+
+export type Tags = (typeof allTags)[number]["id"];
+
+export type GetPostsByTag = {
+  slug: string;
+  title: string;
+  description: string;
+  published_at: string;
+  modified: string | undefined;
+  tags: Tags[];
+  Component: (props: MDXProps) => JSX.Element;
 };

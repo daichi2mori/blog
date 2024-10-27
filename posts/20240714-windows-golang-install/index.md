@@ -4,6 +4,7 @@ description: "Go言語をWindowsにインストールする方法です。"
 published_at: "2024-07-14"
 modified:
 published: true
+tags: ["windows", "golang"]
 ---
 
 ## はじめに

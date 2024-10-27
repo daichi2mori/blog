@@ -4,6 +4,7 @@ description: "アプリを終了したのにPortが使われていたので切�
 published_at: "2024-07-21"
 modified:
 published: true
+tags: ["linux", "ubuntu"]
 ---
 
 ### プロセス中のポートを表示

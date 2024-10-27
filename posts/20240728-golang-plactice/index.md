@@ -4,6 +4,7 @@ description: "Go言語ファイルの実行方法、ファイル分割、パッ�
 published_at: "2024-07-28"
 modified:
 published: true
+tags: ["golang"]
 ---
 
 ## ファイル実行

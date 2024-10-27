@@ -8,9 +8,9 @@ export const CustomHead = ({
   desc,
   slug,
 }: {
-  title: string | undefined;
-  desc: string | undefined;
-  slug: string | undefined;
+  title?: string;
+  desc?: string;
+  slug?: string;
 }) => {
   const c = useRequestContext();
   const currentUrl = "https://daichi2mori.com";

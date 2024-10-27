@@ -26,7 +26,7 @@ export default createRoute((c) => {
                 <span className="absolute inset-0 md:hidden" />
               </a>
               <p class={"text-sm md:text-base"}>{post.description}</p>
-              <Publish published_at={post.published_at} modified={post.modified} />
+              <Publish published_at={post.published_at} modified={post.modified} tags={post.tags} />
             </div>
 
             <a
@@ -43,6 +43,7 @@ export default createRoute((c) => {
                 fill="none"
                 stroke="#09090b"
                 stroke-width="2"
+                class={"stroke-primary"}
               >
                 <title>Right Arrow Icon</title>
                 <path d="m9 18 6-6-6-6" />

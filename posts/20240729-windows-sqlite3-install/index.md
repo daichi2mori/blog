@@ -4,6 +4,7 @@ description: "Go言語の学習にSQLite3を使おうと思ったので、イン
 published_at: "2024-07-29"
 modified:
 published: true
+tags: ["windows", "sqlite"]
 ---
 
 ## SQLite3 のインストール
