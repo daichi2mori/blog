@@ -31,8 +31,8 @@ const extractFilenameFromPath = (path: string) => {
 
 export const getPosts = () => {
   const postsData = Object.entries(posts)
+    .filter(([_, post]) => post.frontmatter?.published)
     .sort(sortByDateDesc())
-    .filter(([_, post]) => post.frontmatter.published)
     .map(([path, post]) => ({
       slug: extractFilenameFromPath(path),
       title: post.frontmatter.title,
