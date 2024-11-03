@@ -42,9 +42,10 @@ const createFilePath = `./posts/${dirname}/index.${extension}`;
 const frontmatter = `---
 title:
 description:
-published_at: '${today}'
+published_at: "${today}"
 modified:
-published: false
+published: true
+tags: [""]
 ---
 `;
 
