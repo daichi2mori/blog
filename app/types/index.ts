@@ -44,6 +44,7 @@ export const allTags = [
   { id: "react", label: "React" },
   { id: "vite", label: "Vite" },
   { id: "css", label: "CSS" },
+  { id: "javascript", label: "JavaScript" },
 ] as const;
 
 export type Tags = (typeof allTags)[number]["id"];
