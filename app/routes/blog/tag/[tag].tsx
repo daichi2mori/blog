@@ -3,7 +3,8 @@ import { getPostByTag } from "app/lib/posts";
 import { ssgParams } from "hono/ssg";
 import { createRoute } from "honox/factory";
 import { Fragment } from "hono/jsx/jsx-runtime";
-import { allTags, type GetPostsByTag, type Tags } from "app/types";
+import type { GetPostsByTag, Tags } from "app/types";
+import { allTags } from "site.config";
 
 export default createRoute(
   ssgParams(() => {

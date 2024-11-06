@@ -1,4 +1,5 @@
-import { allTags, type Tags } from "../types/index";
+import { allTags } from "site.config";
+import type { Tags } from "../types/index";
 import { Fragment } from "hono/jsx/jsx-runtime";
 
 const Publish = ({
