@@ -32,7 +32,7 @@ export default createRoute(
             {post?.title}
           </h1>
         </div>
-        <Publish published_at={post?.published_at} modified={post?.modified} />
+        <Publish published_at={post?.published_at} modified={post?.modified} tags={post?.tags} />
         <div class={"markdown"}>{post?.Component({})}</div>
       </article>,
       {

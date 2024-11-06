@@ -13,6 +13,7 @@ const Publish = ({
 }) => {
   return (
     <div class={"flex flex-wrap items-center gap-x-4 gap-y-1"}>
+      {/* 投稿日 */}
       <div class={"flex items-center gap-1.5"}>
         <div
           class={"bg-secondary w-7 h-7 md:w-8 md:h-8 grid place-items-center rounded-[0.375rem]"}
@@ -37,6 +38,7 @@ const Publish = ({
           {published_at}
         </span>
       </div>
+      {/* 最終編集日 */}
       {modified && (
         <div class={"flex items-center gap-1.5"}>
           <div
@@ -64,6 +66,7 @@ const Publish = ({
           </span>
         </div>
       )}
+      {/* タグ一覧 */}
       <div class={"flex items-center gap-1.5"}>
         <div
           class={"bg-secondary w-7 h-7 md:w-8 md:h-8 grid place-items-center rounded-[0.375rem]"}
@@ -84,6 +87,7 @@ const Publish = ({
           </svg>
         </div>
         <div class={"text-xs md:text-sm font-medium text-gray-400 dark:text-neutral-400"}>
+          {console.log(tags)}
           {Array.isArray(tags) &&
             tags.length > 0 &&
             tags.map((tag, index) => {
