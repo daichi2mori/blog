@@ -87,7 +87,6 @@ const Publish = ({
           </svg>
         </div>
         <div class={"text-xs md:text-sm font-medium text-gray-400 dark:text-neutral-400"}>
-          {console.log(tags)}
           {Array.isArray(tags) &&
             tags.length > 0 &&
             tags.map((tag, index) => {
