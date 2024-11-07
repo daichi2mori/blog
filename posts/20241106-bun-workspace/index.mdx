@@ -1,0 +1,175 @@
+---
+title: "Bunでモノレポ環境を構築してみた"
+description: "Bunがワークスペースをサポートしていると知ったので試してみました。"
+published_at: "2024-11-06"
+modified:
+published: true
+tags: ["bun"]
+---
+
+## Bun セットアップ
+
+まず`bun-workspace`というディレクトリを作成し、`bun init`コマンドで初期設定を行います。
+
+```bash
+mkdir bun-workspace
+cd bun-workspace
+bun init -y
+```
+
+初期設定が完了すると以下のような構造になります。
+
+```bash
+bun-workspace/
+  ├── .gitignore
+  ├── bun.lockb
+  ├── index.ts
+  ├── package.json
+  ├── README.md
+  └── tsconfig.json
+```
+
+ルートパッケージは誤送信を防ぐため、`package.json`の`private`フィールドを設定します。
+
+```json title="package.json"
+{
+  "name": "bun-workspace",
+  "private": true,
+  "module": "index.ts",
+  "type": "module",
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  }
+}
+```
+
+## ワークスペース設定
+
+ワークスペースに含めたいパッケージを`workspace`フィールドに指定します。
+
+ここでは`packages`ディレクトリをワークスペースにしたいため、以下のように設定します。
+
+```json title="package.json"
+{
+  "name": "bun-workspace",
+  "private": true,
+  "workspaces": ["packages/*"],
+  "module": "index.ts",
+  "type": "module",
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  }
+}
+```
+
+## パッケージ設定
+
+`packages`ディレクトリ配下に`app`と`lib`を作成し、さらにそれぞれに`index.ts`と`package.json`を作成します。
+
+以下のようなファイル構造になります。
+
+```bash
+bun-workspace/
+  ├── packages
+  │   ├── app
+  │   │   ├── index.ts
+  │   │   └── package.json
+  │   └── lib
+  │       ├── index.ts
+  │       └── package.json
+  ├── .gitignore
+  ├── bun.lockb
+  ├── index.ts
+  ├── package.json
+  ├── README.md
+  └── tsconfig.json
+```
+
+### lib パッケージ
+
+`lib`パッケージを設定していきます。
+
+特定のパッケージのみにライブラリを追加するには、そのディレクトリに移動し`bun add`するだけです。
+
+```bash
+cd package/lib
+bun add es-toolkit
+```
+
+> [!NOTE] > `es-toolkit`は日常的に使えるユーティリティ関数をまとめて提供しているライブラリになります。
+> `lodash`よりバンドルサイズが小さく、パフォーマンスも高いです。
+>
+> より詳しくは以下のサイトをご覧ください。
+>
+> <LinkCard url="https://es-toolkit.slash.page/" />
+
+`package.json`は以下のようになります。
+
+```json title="packages/lib/pakcage.json"
+{
+  "name": "lib",
+  "version": "1.0.0",
+  "main": "index.ts",
+  "type": "module",
+  "dependencies": {
+    "es-toolkit": "^1.26.1"
+  }
+}
+```
+
+他のパッケージから参照できる関数を`index.ts`に設定します。
+ここでは`myShuffle`関数を設定しています。
+
+```ts title="packages/lib/index.ts"
+import { shuffle } from "es-toolkit";
+
+export const myShuffle = <T>(arr: T[]): T[] => shuffle(arr);
+```
+
+### app パッケージ
+
+次に`app`パッケージの設定をします。
+
+ここでは`lib`パッケージから`myShuffle`関数をインポートし、コンソールで出力するという内容を記述します。
+
+ワークスペース間で依存関係を追加するには`dependencies`に`workspace:*`を追加します。
+
+```json title="packages/app/pakcage.json"
+{
+  "name": "app",
+  "version": "1.0.0",
+  "main": "index.ts",
+  "type": "module",
+  "dependencies": {
+    "lib": "workspace:*"
+  }
+}
+```
+
+上記のように追加したら、ルートディレクトリで`bun install`を実行することですべてのワークスペースの依存関係をインストールできます。
+
+```bash
+bun install
+```
+
+あとは`app/index.ts`で関数を呼ぶだけで使用できます。
+
+```ts title="packages/app/index.ts"
+import { myShuffle } from "lib";
+
+const data = [1, 2, 3, 4, 5];
+
+console.log(myShuffle(data));
+```
+
+```bash
+cd packages/app
+bun run index.ts
+> [ 4, 1, 5, 3, 2 ]
+```
