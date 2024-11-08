@@ -2,7 +2,7 @@
 title: "Bunでモノレポ環境を構築してみた"
 description: "Bunがワークスペースをサポートしていると知ったので試してみました。"
 published_at: "2024-11-06"
-modified: "2024-11-07"
+modified: "2024-11-08"
 published: true
 tags: ["bun"]
 ---
@@ -173,6 +173,45 @@ cd packages/app
 bun run index.ts
 > [ 4, 1, 5, 3, 2 ]
 ```
+
+## 複数のパッケージを一度に実行
+
+`bun`の`--filter`フラグを使用すれば、ワークスペース内の複数のパッケージを簡単に実行できます。
+
+たとえば以下のように`packages`ディレクトリ内に`vite`で作成した`frontend`パッケージと、`hono`で作成した`api`パッケージがあるとします。
+
+```bash
+bun-workspace/
+  └── packages
+      ├── api
+      │   └── package.json
+      └── frontend
+          └── package.json
+```
+
+このとき、それぞれの`package.json`の`script`フィールドに`dev`コマンドが設定されていれば、`bun --filter '*' dev`を実行することで 2 つの開発環境を立ち上げることができます。
+
+```bash
+bun --filter '*' dev
+```
+
+アスタリスク部分は Glob に対応しているため、特定のパッケージにマッチさせることも可能です。
+
+たとえば、`pkg-a`と`pkg-b`というパッケージがあり、`pkg`と付くもののみ立ち上げたい場合は、
+
+```bash
+bun --filter 'pkg*` dev
+```
+
+とするだけで起動します。
+
+また、特定ディレクトリ配下にあるパッケージすべてを立ち上げたい場合は、
+
+```bash
+bun --filter './pakcages/pkg/**' dev
+```
+
+で起動します。
 
 ## さいごに
 
