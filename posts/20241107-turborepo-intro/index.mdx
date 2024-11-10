@@ -1,0 +1,83 @@
+---
+title: "モノレポ学習でTurborepoを試してみました"
+description: "turborepoのセットアップを一から学習しました"
+published_at: "2024-10-28"
+modified:
+published: true
+tags: ["javascript"]
+---
+
+## 最小構成で作成
+
+まずはルートディレクトリに`package.json`を作成し、以下のように設定します。
+
+```json title="package.json"
+{
+  "name": "my-turborepo",
+  "private": true,
+  "scripts": {
+    "build": "turbo run build",
+    "dev": "turbo run dev",
+    "lint": "turbo run lint"
+  }
+}
+```
+
+この設定で、`apps`や`packages`に`package.json`あるディレクトリがパッケージとみなされます。
+
+> [!WARNING]
+> Turborepo は`pakcages/**`のようなネストしたパッケージには対応していません。
+> ディレクトリごとにグループ化したい場合は、`packages/group/*`のように設定する必要があります。
+
+次に`turbo`をインストールします。
+
+```bash
+pnpm add turbo --save-dev --ignore-workspace-root-check
+```
+
+> [!IMPORTANT] > `turbo`は開発者用ツールであり、ワークスペース全体で利用することを想定しているため、
+> ワークスペースのルートに追加するのが一般的ですが、`pnpm`はデフォルトで禁止しています。
+> このような場合に`--ignore-workspace-root-check`を使用することで制限を無視してインストールできます。
+> `npm`を使用する場合には関係ありません。
+
+インストール後は以下のようになっているはずです。
+
+```json title="package.json"
+{
+  "name": "turborepo-intro",
+  "private": true,
+  "scripts": {
+    "build": "turbo run build",
+    "dev": "turbo run dev",
+    "lint": "turbo run lint"
+  },
+  "devDependencies": {
+    "turbo": "^2.2.3"
+  },
+  "packageManager": "pnpm@8.15.6",
+  "engines": {
+    "node": ">=22"
+  }
+}
+```
+
+また`lockファイル`も作成されていると思いますが、これは`turbo`でも依存関係を把握するために使用するため、もし存在しない場合は予期せぬ動作をする可能性があります。
+
+### Packages
+
+`exportsフィールド`は、設定したパッケージを他のパッケージで使用する場合のエントリーポイントになります。
+
+`@repo/math`パッケージがある場合は以下のように、それぞれの計算方法ごとの関数でエクスポートできます。
+
+```json title="./packages/math/package.json"
+{
+  "exports": {
+    ".": "./dist/constants.ts",
+    "./add": "./dist/add.ts",
+    "./subtract": "./dist/subtract.ts"
+  }
+}
+```
+
+> [!TIP] > `package.json`の`nameフィールド`はワークスペース内で一意でなければならないです。
+> そのためパッケージ名を`@organization-name/package-name`とするのがベストプラクティスです。
