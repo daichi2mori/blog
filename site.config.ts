@@ -18,4 +18,5 @@ export const allTags = [
   { id: "vite", label: "Vite" },
   { id: "css", label: "CSS" },
   { id: "javascript", label: "JavaScript" },
+  { id: "python", label: "Python" },
 ] as const;
