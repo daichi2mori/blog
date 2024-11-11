@@ -1,0 +1,98 @@
+---
+title: "WindowsにPython環境をuvで構築"
+description: "いままでpyenv+poetryを使っていましたが、uvが最近話題になっているので使ってみました。"
+published_at: "2024-11-11"
+modified:
+published: true
+tags: ["python"]
+---
+
+## インストール
+
+<LinkCard url="https://docs.astral.sh/uv/getting-started/installation/" />
+
+公式サイトでは以下のコマンドで紹介されていますが、これは `PowerShell 5` 以前を想定しているみたいです。
+
+```bash
+powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"
+```
+
+一応 `PowerShell 7` 以降はこちらが標準です。
+
+```bash
+pwsh -c "irm https://astral.sh/uv/install.ps1 | iex"
+```
+
+ただ今回は`Winget`でインストールを進めます。
+
+```bash
+winget install --id astral-sh.uv
+```
+
+バージョン確認で正常に表示されれば成功です。
+
+```bash
+uv --version
+```
+
+## 基本的なコマンド
+
+- Python のインストール
+
+```bash
+uv python install 3.11 3.12
+```
+
+- Python ファイルの実行
+
+```bash
+uv run example.py
+```
+
+- 依存関係の追加
+
+```bash
+uv add [名称]
+```
+
+- 依存関係の削除
+
+```bash
+uv remove [名称]
+```
+
+- プロジェクトの作成
+
+```bash
+uv init
+```
+
+- バージョンの固定
+
+```bash
+uv python pin 3.12.7
+```
+
+- venv 作成
+
+```bash
+uv venv
+```
+
+- 仮想環境アクティベート
+
+```bash
+.venv\Scripts\activate
+```
+
+- 仮想環境無効化
+
+```bash
+deactivate
+```
+
+## おわり
+
+もともと`pyenv`+`poetry`で使用しましたが、`uv`1 つになったことでコマンド操作が楽になりました。
+
+`uv`の動作も早いため結構快適に使えています。
