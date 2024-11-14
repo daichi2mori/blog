@@ -51,7 +51,7 @@
 }
 
 .markdown > figure[data-rehype-pretty-code-figure] {
-  @apply my-5
+  @apply my-5;
 }
 
 .markdown > figure > figcaption[data-rehype-pretty-code-title] {
@@ -71,6 +71,14 @@
 }
 
 .markdown p > code {
+  @apply inline px-1.5 py-1 mx-0.5 bg-background dark:bg-slate-700 rounded;
+}
+
+.markdown ul > li > code {
+  @apply inline px-1.5 py-1 mx-0.5 bg-background dark:bg-slate-700 rounded;
+}
+
+.markdown ol > li > code {
   @apply inline px-1.5 py-1 mx-0.5 bg-background dark:bg-slate-700 rounded;
 }
 
