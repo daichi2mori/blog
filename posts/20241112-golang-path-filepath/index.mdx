@@ -1,0 +1,505 @@
+---
+title: "Go言語のpathとfilepathパッケージ"
+description: "よく使うpahtとfilepathをまとめてみました。"
+published_at: "2024-11-12"
+modified:
+published: true
+tags: ["golang"]
+---
+
+## 使い分け
+
+`path`パッケージは、スラッシュで区切られたパスを操作するためのパッケージであり、URL などの仮想パスで使用するものです。
+
+`path/filepath`は逆に物理的なパスに使用し、クロスプラットフォームなファイルパスの操作ができます。
+
+## path
+
+<LinkCard url="https://pkg.go.dev/path" />
+
+### Base
+
+パスの最後の要素を返します。パスからファイル名を取得したいときなどで使用します。
+
+- パスが空の場合は`.`を返す
+- パスがスラッシュのみの場合は`/`を返す
+
+```go
+fmt.Println(path.Base("./a/b/example.txt"))
+// example.txt
+
+fmt.Println(path.Base("/a/b"))
+// b
+
+fmt.Println(path.Base(""))
+// .
+
+fmt.Println(path.Base("///"))
+// /
+```
+
+### Clean
+
+path に相当する最小のパス名を返します。
+
+以下のルールを処理ができなくなるまで繰り返します。
+
+1. 複数のスラッシュを 1 つのスラッシュに置き換える
+2. `.`といったカレントディレクトリを削除
+3. `..`がパスにある場合はその前の親ディレクトリと一緒に削除
+4. ルートパスを開始する`..`を削除する（`/..`を`/`に）
+
+- パスが空や、スラッシュのみの場合は`Base`と同じ
+
+```go
+fmt.Println(path.Clean("a//b"))
+// a/b
+
+fmt.Println(path.Clean("a/b/."))
+// a/b
+
+fmt.Println(path.Clean("a/b/c/.."))
+// /a/b
+
+fmt.Println(path.Clean("/../a/b"))
+// /a/b
+```
+
+### Dir
+
+パスの最後の要素以外を返します。
+
+- 最後の要素を削除した後は`Clean`で処理されたパスが返ってくる
+- パスが空やスラッシュのみの場合は`Base`と同じ
+
+```go
+fmt.Println(path.Dir("/a/b/c"))
+// /a/b
+
+fmt.Println(path.Dir("a/b/c"))
+// a/b
+
+fmt.Println(path.Dir("/a/"))
+// /a
+
+fmt.Println(path.Dir("a/"))
+// a
+
+fmt.Println(path.Dir("./a/b/example.txt"))
+// a/b
+```
+
+### Ext
+
+パスから拡張子を返します。
+
+- パスが空やスラッシュのみの場合は、空文字が返ってくる
+
+```go
+fmt.Println(path.Ext("/a/b/main.go"))
+// .go
+
+fmt.Println(path.Ext("/"))
+//
+
+fmt.Println(path.Ext(""))
+//
+```
+
+### IsAbs
+
+絶対パスかどうかを判定する
+
+```go
+fmt.Println(path.IsAbs("/a/b"))
+// true
+
+fmt.Println(path.IsAbs("./a/b"))
+// false
+```
+
+### Join
+
+任意の数のパス要素をスラッシュで区切って 1 つのパスに結合します。
+
+- パスは`Clean`で処理されたパスが返ってくる
+- 引数がない場合や要素が空の場合は、空文字を返す
+
+```go
+fmt.Println(path.Join("a", "b", "c"))
+// a/b/c
+
+fmt.Println(path.Join("a", "b/c"))
+// a/b/c
+
+fmt.Println(path.Join())
+//
+
+fmt.Println(path.Join("", ""))
+//
+```
+
+### Match
+
+パスがパターンにマッチするかを判定します。
+
+第一引数にパターン、第二引数にパスを代入します。
+
+```go
+fmt.Println(path.Match("abc", "abc"))
+// true <nil>
+
+fmt.Println(path.Match("a*", "abc"))
+// true <nil>
+
+fmt.Println(path.Match("a*/b", "a/c/b"))
+// false <nil>
+```
+
+### Split
+
+パスをディレクトリとファイル名に分割します。
+
+```go
+fmt.Println(path.Split("a/main.go"))
+// a/ main.go
+
+fmt.Println(path.Split("main.go"))
+//  main.go
+
+fmt.Println(path.Split(""))
+//
+```
+
+## path/filepath
+
+<LinkCard url="https://pkg.go.dev/path/filepath" />
+
+### Abs
+
+相対パスを絶対パスに変換します。
+
+- パスは`Clean`で処理されたパスが返ってくる
+
+```go
+fmt.Println(filepath.Abs("./main.go"))
+// C:\a\b\main.go <nil>
+```
+
+### Base
+
+パスから最後の要素を返します。
+
+- パスが空の場合は`.`を返す
+- パスが OS セパレータのみの場合は単一の OS セパレータを返す
+
+```go
+fmt.Println(filepath.Base("./a/b/example.txt"))
+// example.txt
+
+fmt.Println(filepath.Base("/a/b"))
+// b
+
+fmt.Println(filepath.Base(""))
+// .
+
+fmt.Println(filepath.Base(`\\\`))
+// \
+```
+
+### Clean
+
+path に相当する最小のパス名を返します。
+
+以下のルールを処理ができなくなるまで繰り返します。
+
+1. 複数の OS セパレータを 1 つに置き換える
+2. `.`といったカレントディレクトリを削除
+3. `..`がパスにある場合はその前の親ディレクトリと一緒に削除
+4. `/..`を`/`に置き換える（OS セパレータを`/`と仮定した場合）
+
+- 返されるパスがスラッシュで終わるのは、ルートディレクトリのみ
+- スラッシュはすべて OS セパレータに置き換わる
+- パスが空や、OS セパレータのみの場合は`Base`と同じ
+
+```go
+fmt.Println(filepath.Clean("//host/share/../x"))
+// \\host\share\x
+
+fmt.Println(filepath.Clean("a//b"))
+// a\b
+
+fmt.Println(filepath.Clean("a/b/."))
+// a\b
+
+fmt.Println(filepath.Clean("a/b/c/.."))
+// a\b
+
+fmt.Println(filepath.Clean("/../a/b"))
+// \a\b
+```
+
+### Dir
+
+パスの最後の要素以外を返します。
+
+- 最後の要素を削除した後は`Clean`で処理されたパスが返ってくる
+- パスが空やスラッシュのみの場合は`Base`と同じ
+
+```go
+fmt.Println(filepath.Dir("/a/b/c"))
+// \a\b
+
+fmt.Println(filepath.Dir("a/b/c"))
+// a\b
+
+fmt.Println(filepath.Dir("/a/"))
+// \a
+
+fmt.Println(filepath.Dir("a/"))
+// a
+
+fmt.Println(filepath.Dir("./a/b/example.txt"))
+// a\b
+```
+
+### EvalSymlinks
+
+シンボリックリンク先のパスを返します。Windows だとショートカット先のパスになります。
+
+どうも私の環境ではうまくいかなかった。そのうちちゃんと調べます。
+
+```go
+fmt.Println(filepath.EvalSymlinks(`C:\a\b\main.go.lnk`))
+// C:\c\d\main.go.lnk <nil>
+```
+
+### Ext
+
+パスから拡張子を返します。
+
+- パスが空やスラッシュのみの場合は、空文字が返ってくる
+
+```go
+fmt.Println(filepath.Ext("/a/b/main.go"))
+// .go
+
+fmt.Println(filepath.Ext("/"))
+//
+
+fmt.Println(filepath.Ext(""))
+//
+```
+
+### FromSlash
+
+パスのスラッシュを OS セパレータに置き換えます。
+
+```go
+fmt.Println(filepath.FromSlash("C:/a/b"))
+// C:\a\b
+```
+
+### Glob
+
+パターンにマッチするすべてのファイル名を返します。マッチするファイルがない場合には空のスライスを返します。
+
+```go
+fmt.Println(filepath.Glob("./*.go"))
+// [bar.go foo.go] <nil>
+
+fmt.Println(filepath.Glob("./*.gone"))
+// [] <nil>
+```
+
+### IsAbs
+
+絶対パスかどうかを判定する
+
+```go
+fmt.Println(filepath.IsAbs("C:/a/b"))
+// true
+
+fmt.Println(filepath.IsAbs("./a/b"))
+// false
+```
+
+### IsLocal
+
+パスがローカルなものかを判定します。以下の条件をすべて満たす場合に`true`を返します。
+
+- 絶対パスではない
+- 空ではない
+- Windows 環境では、`NUL`などの予約語ではない
+
+```go
+	fmt.Println(filepath.IsLocal("./foo.go"))
+  // true
+
+	fmt.Println(filepath.IsLocal("./a/b/bar.go"))
+  // true
+
+	fmt.Println(filepath.IsLocal("/a/b"))
+  // false
+
+	fmt.Println(filepath.IsLocal(`C:\a\b\c`))
+  // false
+
+	fmt.Println(filepath.IsLocal(""))
+  // false
+
+	fmt.Println(filepath.IsLocal("NUL"))
+  // false
+```
+
+### Join
+
+任意の数のパス要素を OS セパレータで区切って 1 つのパスに結合します。
+
+- パスは`Clean`で処理されたパスが返ってくる
+- 引数がない場合や要素が空の場合は、空文字を返す
+
+```go
+fmt.Println(filepath.Join("a", "b", "c"))
+// a/b/c
+
+fmt.Println(filepath.Join("a", "b/c"))
+// a/b/c
+
+fmt.Println(filepath.Join())
+//
+
+fmt.Println(filepath.Join("", ""))
+//
+```
+
+### Localize
+
+スラッシュで区切られたパスを OS セパレータに変換します。入力パスは`io/fs.ValidPath`で有効とされる形式である必要があります。
+
+Windows では`a/b`というパスは`a\b`に変換されますが、`a\b`は無効なパスとみなされエラーになります。
+
+```go
+// 以下Windows環境
+
+fmt.Println(filepath.Localize("a/b"))
+// a\b <nil>
+
+fmt.Println(filepath.Localize(`a\b`))
+// invalid path
+```
+
+### Match
+
+パスがパターンにマッチするかを判定します。
+
+第一引数にパターン、第二引数にパスを代入します。
+
+```go
+fmt.Println(filepath.Match("abc", "abc"))
+// true <nil>
+
+fmt.Println(filepath.Match("a*", "abc"))
+// true <nil>
+
+fmt.Println(filepath.Match("a/c*/", "a/c/b"))
+// false <nil>
+```
+
+### Rel
+
+指定したパスからターゲットパスへの相対パスを返します。
+
+- パスは`Clean`で処理されたパスが返ってくる
+
+```go
+fmt.Println(filepath.Rel("/a/b", "/a/c/foo.go"))
+// ..\c\foo.go <nil>
+```
+
+### Split
+
+パスをディレクトリとファイル名に分割します。
+
+```go
+fmt.Println(filepath.Split("a/main.go"))
+// a/ main.go
+
+fmt.Println(filepath.Split("main.go"))
+//  main.go
+
+fmt.Println(filepath.Split(""))
+//
+```
+
+### SplitList
+
+OS 固有のパスリスト区切り文字で結合されたパスを分割し、それぞれのパス要素をスライスとして返します。
+
+Unix 系 OS ではコロン(`:`)、Windows ではセミコロン(`;`)が区切り文字です。
+
+```go
+fmt.Println(filepath.SplitList("/a/b/c:/d/e:/f"))
+// [/a/b/c /d/e /f]
+
+fmt.Println(filepath.SplitList(`C:\a\b;C:\c\d`))
+// [C:\a\b C:\c\d]
+```
+
+### ToSlash
+
+OS セパレータをスラッシュに変換します。
+
+- パスの正規化（`Clean`）は行わない
+
+```go
+fmt.Println(filepath.ToSlash(`C:\a\b`))
+// C:/a/b
+
+fmt.Println(filepath.ToSlash(`/a/b`))
+// /a/b
+```
+
+### VolumeName
+
+パスから先頭のボリューム名を抽出します。主に Windows 環境で使用します。Unix 系ではボリューム名はないため空文字が返ってきます。
+
+```go
+fmt.Println(filepath.VolumeName(`C:\a\b\c`))
+// C:
+
+fmt.Println(filepath.VolumeName(`\\a\b\c\d`))
+// \\a\b
+
+fmt.Println(filepath.VolumeName(`/a/b`))
+//
+```
+
+### WalkDir
+
+指定したディレクトリ配下のファイルやディレクトリを再帰的に巡回し、各パスに対して関数を呼び出します。
+
+> [!TIP] > `Walk`という関数もありますが、基本的にはこちらの関数を使用してください。
+> `WalkDir`のほうが後に実装された関数で、パフォーマンスに優れています。
+
+```go
+func main() {
+	dir := `.\a`
+
+	err := filepath.WalkDir(dir, func(path string, info fs.DirEntry, err error) error {
+		if err != nil {
+			return err
+		}
+		if info.IsDir() {
+			return nil
+		}
+		fmt.Println(path)
+		return nil
+	})
+	if err != nil {
+		fmt.Println(err)
+	}
+}
+// a\foo.go
+// a\bar.txt
+```
