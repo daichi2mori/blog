@@ -1,0 +1,27 @@
+---
+title: "PaizaをGo言語で実行"
+description: "golangでpaizaの問題を解いたときの知見を書いてきます"
+published_at: "2024-11-20"
+modified:
+published: true
+tags: ["golang"]
+---
+
+## 入力の受け取り
+
+```go
+func main() {
+	// NewScanner()でデータを読み取るScannerインスタンスを作成
+	// os.Stdinはプログラムの標準入力を参照しています
+	scanner := bufio.NewScanner(os.Stdin)
+	// Scan()で次の行を読み取ります
+	scanner.Scan()
+	// Text()で読み取ったデータを取得
+	text := scanner.Text()
+	fmt.Println(text)
+
+	scanner.Scan()
+	number, _ := strconv.Atoi(scanner.Text())
+	fmt.Println(number)
+}
+```
