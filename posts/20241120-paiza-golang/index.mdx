@@ -2,12 +2,14 @@
 title: "PaizaをGo言語で実行"
 description: "golangでpaizaの問題を解いたときの知見を書いてきます"
 published_at: "2024-11-20"
-modified:
+modified: "2024-11-21"
 published: true
 tags: ["golang"]
 ---
 
 ## 入力の受け取り
+
+- 一行ずつ取得する
 
 ```go
 func main() {
@@ -23,5 +25,28 @@ func main() {
 	scanner.Scan()
 	number, _ := strconv.Atoi(scanner.Text())
 	fmt.Println(number)
+}
+```
+
+- 半角空白でわかれているとき
+
+```go
+func main() {
+	scanner := bufio.NewScanner(os.Stdin)
+	scanner.Scan()
+	parts := strings.Split(scanner.Text(), " ")
+	a := parts[0]
+	b, _ := strconv.Atoi(parts[1])
+}
+```
+
+- 一文字ずつ取得する
+
+取得する数が分かっているときはこちらのほうが記述量が少ない
+
+```go
+func main() {
+	var x, y, N int
+	fmt.Scan(&x, &y, &N)
 }
 ```
