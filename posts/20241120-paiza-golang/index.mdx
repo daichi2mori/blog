@@ -50,3 +50,118 @@ func main() {
 	fmt.Scan(&x, &y, &N)
 }
 ```
+
+## へび
+
+<LinkCard url="https://paiza.jp/works/mondai/a_rank_level_up_problems/a_rank_snake_mapmove_boss" />
+
+この問題は初期に与えられたマップ上をえびが移動し、最大 100 回行動するか障害物に当たり移動できなくなると終了するというものです。
+
+重量な点としては、方向転換をおこなう時刻までは特定の向きに直進し続けることです。
+
+```go
+package main
+
+import (
+	"bufio"
+	"fmt"
+	"os"
+	"strconv"
+	"strings"
+)
+
+type Position struct {
+	y, x int
+}
+
+func main() {
+	scanner := bufio.NewScanner(os.Stdin)
+	scanner.Scan()
+	cols, rows, initY, initX, count, _ := readInt(scanner.Text())
+
+	grid := make([][]rune, cols)
+
+	for i := 0; i < cols; i++ {
+		scanner.Scan()
+		grid[i] = []rune(scanner.Text())
+	}
+
+	turns := make([]struct {
+		t int
+		d string
+	}, count)
+
+	for i := 0; i < count; i++ {
+		scanner.Scan()
+		time, direction, _ := readTimeDirectionPair(scanner.Text())
+		turns[i].t = time
+		turns[i].d = direction
+	}
+
+	direction := 0             // 北向きで開始 (0: 北, 1: 東, 2: 南, 3: 西)
+	dirY := []int{-1, 0, 1, 0} // Y軸は北に移動する場合に-1される
+	dirX := []int{0, 1, 0, -1} // X軸は東に移動する場合に+1される
+
+	head := Position{initY, initX}
+	snake := []Position{head}
+	grid[head.y][head.x] = '*'
+
+	var nextX, nextY int
+
+	var time int = 0
+	var turnIndex int = 0
+
+	for time <= 99 {
+		if time == turns[turnIndex].t {
+			switch turns[turnIndex].d {
+			case "L":
+				direction = (direction + 3) % 4
+			case "R":
+				direction = (direction + 1) % 4
+			}
+			turnIndex++
+		}
+
+		// 次の移動先を計算
+		nextX = head.x + dirX[direction]
+		nextY = head.y + dirY[direction]
+
+		// 移動可能かどうかのチェック
+		if nextY < 0 || nextY >= cols || nextX < 0 || nextX >= rows || grid[nextY][nextX] == '#' || grid[nextY][nextX] == '*' {
+			break // 移動不可
+		}
+
+		// 移動する
+		head = Position{nextY, nextX}
+		snake = append(snake, head)
+		grid[head.y][head.x] = '*'
+
+		time++
+
+		// 与えられた移動回数と実際に移動した回数が同じなら終了
+		if count == turnIndex {
+			break
+		}
+	}
+
+	for _, line := range grid {
+		fmt.Println(string(line))
+	}
+}
+
+func readInt(line string) (int, int, int, int, int, error) {
+	parts := strings.Split(line, " ")
+	cols, _ := strconv.Atoi(parts[0])
+	rows, _ := strconv.Atoi(parts[1])
+	initY, _ := strconv.Atoi(parts[2])
+	initX, _ := strconv.Atoi(parts[3])
+	count, _ := strconv.Atoi(parts[4])
+	return cols, rows, initY, initX, count, nil
+}
+
+func readTimeDirectionPair(line string) (int, string, error) {
+	parts := strings.Split(line, " ")
+	time, _ := strconv.Atoi(parts[0])
+	return time, parts[1], nil
+}
+```
