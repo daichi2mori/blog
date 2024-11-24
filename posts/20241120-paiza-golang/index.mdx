@@ -2,7 +2,7 @@
 title: "PaizaをGo言語で実行"
 description: "golangでpaizaの問題を解いたときの知見を書いてきます"
 published_at: "2024-11-20"
-modified: "2024-11-21"
+modified: "2024-11-23"
 published: true
 tags: ["golang"]
 ---
@@ -74,6 +74,11 @@ type Position struct {
 	y, x int
 }
 
+type turn struct {
+	t int
+	d string
+}
+
 func main() {
 	scanner := bufio.NewScanner(os.Stdin)
 	scanner.Scan()
@@ -86,10 +91,7 @@ func main() {
 		grid[i] = []rune(scanner.Text())
 	}
 
-	turns := make([]struct {
-		t int
-		d string
-	}, count)
+	turns := make([]turn, count)
 
 	for i := 0; i < count; i++ {
 		scanner.Scan()
@@ -103,7 +105,6 @@ func main() {
 	dirX := []int{0, 1, 0, -1} // X軸は東に移動する場合に+1される
 
 	head := Position{initY, initX}
-	snake := []Position{head}
 	grid[head.y][head.x] = '*'
 
 	var nextX, nextY int
@@ -112,7 +113,7 @@ func main() {
 	var turnIndex int = 0
 
 	for time <= 99 {
-		if time == turns[turnIndex].t {
+		if turnIndex < count && time == turns[turnIndex].t {
 			switch turns[turnIndex].d {
 			case "L":
 				direction = (direction + 3) % 4
@@ -133,15 +134,9 @@ func main() {
 
 		// 移動する
 		head = Position{nextY, nextX}
-		snake = append(snake, head)
 		grid[head.y][head.x] = '*'
 
 		time++
-
-		// 与えられた移動回数と実際に移動した回数が同じなら終了
-		if count == turnIndex {
-			break
-		}
 	}
 
 	for _, line := range grid {
@@ -164,4 +159,5 @@ func readTimeDirectionPair(line string) (int, string, error) {
 	time, _ := strconv.Atoi(parts[0])
 	return time, parts[1], nil
 }
+
 ```
