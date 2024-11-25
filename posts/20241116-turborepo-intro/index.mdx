@@ -3,7 +3,7 @@ title: "モノレポ学習でTurborepoを試してみました"
 description: "turborepoのセットアップを一から学習しました"
 published_at: "2024-11-16"
 modified:
-published: false
+published: true
 tags: ["javascript"]
 ---
 
@@ -81,3 +81,33 @@ pnpm add turbo --save-dev --ignore-workspace-root-check
 
 > [!TIP] > `package.json`の`nameフィールド`はワークスペース内で一意でなければならないです。
 > そのためパッケージ名を`@organization-name/package-name`とするのがベストプラクティスです。
+
+> [!CAUTION]
+> エクスポートでは以下を注意することでパフォーマンスが向上します。
+>
+> - バレルファイルを避ける
+> - `package.json`で`main`フィールドではなく、`exports`フィールドを使用する
+
+### workspace
+
+`pnpm`を使って`workspace`を設定する場合は、`pnpm-workspace.yaml`ファイルを作成する必要があります。
+
+```yaml title="pnpm-workspace.yaml"
+packages:
+  - "apps/*"
+  - "packages/*"
+```
+
+`apps`と`packages`はそれぞれ上記のように設定すると`workspace`の対象になります。
+
+### imports
+
+`imports`フィールドは、パッケージ内の他のモジュールへのサブパスを作成するのに使用します。
+
+```json
+{
+  "imports": {
+    "#*": "./src/*"
+  }
+}
+```
