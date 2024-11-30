@@ -2,31 +2,36 @@
 title: "UbuntuでGitHubにSSH接続"
 description: "新しくUbuntu環境を入手したので、GitHubにSSHで接続する流れを書きました。"
 published_at: "2024-07-21"
-modified:
+modified: "2024-11-30"
 published: true
 tags: ["linux", "ubuntu", "github"]
 ---
 
 1. ユーザー情報の登録
 
+まずローカルにインストールした`git`の設定をします。
+
 ```bash
 git config --global user.name "ユーザー名"
 git config --global user.email "メールアドレス"
 ```
 
-登録の確認
+以下のコマンドで登録の確認をします。
 
 ```bash
-git config user.name
-git config user.email
+git config --list
 ```
 
 2. 公開鍵・秘密鍵の発行
 
-以下のコマンドを実行すると保存場所やパスワードの確認画面が表示されますが、すべて Enter で OK です。
+`ssh-keygen`を使用しキーを作成します。
+
+`Enter file in which to save the key`と表示されたら`Enter`を押します。
+
+`Enter passphrase`と表示されたらセキュアなパスフレーズを入力します。
 
 ```bash
-ssh-keygen -t rsa
+ssh-keygen -t ed25519 -C "your_email@example.com"
 ```
 
 以下コマンドで、`id_rsa`と`id_rsa.pub`が生成されていることを確認
@@ -48,7 +53,21 @@ GitHub の右上のアイコンをクリックし、「Settings」ページに�
 
 ![add ssh key](/static/add-ssh-key.avif)
 
-4. SSH 接続の確認
+4. ssh-agent に追加
+
+バックグラウンドで`ssh-agent`を開始します。
+
+```bash
+eval "$(ssh-agent -s)"
+```
+
+以下のコマンドで SSH プライベートキーを`ssh-agent`に追加します。
+
+```bash
+ssh-add ~/.ssh/id_ed25519
+```
+
+5. SSH 接続の確認
 
 ```bash
 ssh -T git@github.com
@@ -68,7 +87,7 @@ Hi ユーザー名 You've successfully authenticated, but GitHub does not provid
 ssh-add /home/ユーザー名/.ssh/id_rsa
 ```
 
-登録されているのを確認
+登録されているのを確認します。
 
 ```bash
 ssh-add -l
@@ -77,5 +96,21 @@ ssh-add -l
 以下のような文字列が表示されれば成功です。
 
 ```bash
-SHA:XXXXXXXXXXXXXXXXXXXXXXXXXXX
+256 SHA256:XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX your_email@example.com (ED25519)
 ```
+
+6. SSH エージェントの自動起動
+
+毎回手動で SSH エージェントを起動するのは面倒なので、Ubuntu 起動時に自動化します。
+
+```zsh title=".zshrc"
+eval "$(ssh-agent -s)"
+ssh-add ~/.ssh/id_ed25519 > /dev/null 2>&1
+ssh-add -L
+```
+
+## 参考サイト
+
+<LinkCard url="https://docs.github.com/ja/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent" />
+
+<LinkCard url="https://zenn.dev/perilla/scraps/351f43bfcd13ec" />
