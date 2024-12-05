@@ -38,12 +38,6 @@ export const CustomHead = ({
       <link rel="icon" href="/favicon.ico" />
       <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
       <link rel="manifest" href="/site.webmanifest" />
-      <link rel="preconnect" href="https://fonts.googleapis.com" />
-      <link rel="preconnect" href="https://fonts.gstatic.com" />
-      <link
-        href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100..900&display=swap"
-        rel="stylesheet"
-      />
       <CustomScript src="/app/theme.ts" nonce={c.get("secureHeadersNonce")} />
       <Link href="/app/styles/style.css" rel="stylesheet" />
       <Script src="/app/client.ts" async nonce={c.get("secureHeadersNonce")} />
