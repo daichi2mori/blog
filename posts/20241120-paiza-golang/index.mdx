@@ -161,3 +161,85 @@ func readTimeDirectionPair(line string) (int, string, error) {
 }
 
 ```
+
+## 映画館の席の予約
+
+```go
+package main
+
+import (
+	"bufio"
+	"fmt"
+	"math"
+	"os"
+	"strconv"
+	"strings"
+)
+
+type Position struct {
+	p, q int
+}
+
+func main() {
+	scanner := bufio.NewScanner(os.Stdin)
+	scanner.Scan()
+	reservedSeatCount, seatRows, seatCols, bestSeatRow, bestSeatCol, _ := readInt(scanner.Text())
+
+	reserved := make(map[Position]bool)
+
+	for i := 0; i < reservedSeatCount; i++ {
+		scanner.Scan()
+		rp, rq, _ := readInt2(scanner.Text())
+		reserved[Position{rp, rq}] = true
+	}
+
+	minDistance := math.MaxInt
+	candidates := []Position{}
+
+	for p := 0; p < seatRows; p++ {
+		for q := 0; q < seatCols; q++ {
+			pos := Position{p, q}
+			if reserved[pos] {
+				continue
+			}
+
+			distance := absIf(p-bestSeatRow) + absIf(q-bestSeatCol)
+
+			if distance < minDistance {
+				minDistance = distance
+				candidates = []Position{pos}
+			} else if distance == minDistance {
+				candidates = append(candidates, pos)
+			}
+		}
+	}
+
+	for _, seat := range candidates {
+		fmt.Println(seat.p, seat.q)
+	}
+}
+
+func readInt(line string) (int, int, int, int, int, error) {
+	parts := strings.Split(line, " ")
+	reservedSeatCount, _ := strconv.Atoi(parts[0])
+	seatRows, _ := strconv.Atoi(parts[1])
+	seatCols, _ := strconv.Atoi(parts[2])
+	bestSeatRow, _ := strconv.Atoi(parts[3])
+	bestSeatCol, _ := strconv.Atoi(parts[4])
+	return reservedSeatCount, seatRows, seatCols, bestSeatRow, bestSeatCol, nil
+}
+
+func readInt2(line string) (int, int, error) {
+	parts := strings.Split(line, " ")
+	rp, _ := strconv.Atoi(parts[0])
+	rq, _ := strconv.Atoi(parts[1])
+	return rp, rq, nil
+}
+
+func absIf(x int) int {
+	if x < 0 {
+		return -x
+	}
+	return x
+}
+```
