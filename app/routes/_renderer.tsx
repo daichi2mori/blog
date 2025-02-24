@@ -1,5 +1,5 @@
-import Footer from "app/components/Footer";
-import { CustomHead } from "app/components/customHead";
+import { CustomHead } from "app/components/CustomHead";
+import Footer from "app/components/Footer1";
 import { jsxRenderer } from "hono/jsx-renderer";
 
 export default jsxRenderer(({ children, title, desc, slug }) => {

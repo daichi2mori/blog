@@ -9,7 +9,6 @@ type Options = {
 	type?: boolean;
 };
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const CustomScript = (options: Options) => {
 	const src = options.src;
 	const type = !options.type ? undefined : "module";
