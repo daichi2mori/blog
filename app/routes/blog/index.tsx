@@ -1,4 +1,4 @@
-import Publish from "app/components/Published";
+import Publish from "app/components/Publish";
 import { getPosts } from "app/lib/posts";
 import { Fragment } from "hono/jsx/jsx-runtime";
 import { createRoute } from "honox/factory";

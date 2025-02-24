@@ -1,4 +1,4 @@
-import Publish from "app/components/Published";
+import Publish from "app/components/Publish";
 import { getPostBySlug, getPosts } from "app/lib/posts";
 import { ssgParams } from "hono/ssg";
 import { createRoute } from "honox/factory";

@@ -1,4 +1,4 @@
-import Publish from "app/components/Published";
+import Publish from "app/components/Publish";
 import { getPostByTag } from "app/lib/posts";
 import type { GetPostsByTag, Tags } from "app/types";
 import { Fragment } from "hono/jsx/jsx-runtime";
