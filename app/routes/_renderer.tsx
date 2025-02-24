@@ -1,4 +1,4 @@
-import { CustomHead } from "app/components/CustomHead";
+import { CustomHead } from "app/components/CustomHead1";
 import Footer from "app/components/Footer1";
 import { jsxRenderer } from "hono/jsx-renderer";
 

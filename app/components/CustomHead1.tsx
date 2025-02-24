@@ -1,7 +1,7 @@
 import { useRequestContext } from "hono/jsx-renderer";
 import { Link, Script } from "honox/server";
 import { SiteConfig } from "site.config";
-import { CustomScript } from "./CustomScript";
+import { CustomScript } from "./CustomScript1";
 
 export const CustomHead = ({
 	title,
